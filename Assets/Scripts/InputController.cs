@@ -4,23 +4,44 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-
+    //Allows other Scrips to call the Input Controller
+    //place this line into function Start(): IC = InputController.instance;
     public static InputController instance;
 
+    
+    //Allows for the keybinds to be changed in-game (WIP)
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode rightKey = KeyCode.D;
+    public KeyCode upKey = KeyCode.W;
+    public KeyCode downKey = KeyCode.S;
     public bool moveLeft, moveRight, moveUp, moveDown;
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        //KeyCodeDatabase[Inputs.Left] = KeyCode.A;
     }
 
-    // Update is called once per frame
+    //public Dictionary<Inputs, KeyCode> KeyCodeDatabase = new Dictionary<Inputs, KeyCode>();
+
+    /*public enum Inputs
+    {
+        Left, Right, Up, Down
+    }*/
+
+
+
     void Update()
     {
-        moveLeft = Input.GetKey(KeyCode.A);
-        moveRight = Input.GetKey(KeyCode.D);
-        moveUp = Input.GetKey(KeyCode.W);
-        moveDown = Input.GetKey(KeyCode.S);
+        /********************Player Controls******************/
+        /*~~~~~~~~~~~~~~~~~Player Movement~~~~~~~~~~~~~~~~~*/
+        moveLeft = Input.GetKey(leftKey);
+        moveRight = Input.GetKey(rightKey);
+        moveUp = Input.GetKey(upKey);
+        moveDown = Input.GetKey(downKey);
+
+        //use this to allow the player to change the keybinds (WIP)
+        //string s  = Input.inputString;
     }
 }
