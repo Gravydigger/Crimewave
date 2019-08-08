@@ -10,6 +10,9 @@ public class CharacterMovement : MonoBehaviour
     //private new Rigidbody2D rigidbody;
     CameraController cc;
 
+    float moveHorizontal;
+    float moveVertical;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +22,16 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        moveVertical = Input.GetAxisRaw("Vertical");
+    }
+
+    private void FixedUpdate()
+    {
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0);
         //rigidbody.AddForce(playerSpeed * movement);
-        transform.position += movement * playerSpeed * Time.deltaTime;
+        transform.position += movement * playerSpeed * Time.fixedDeltaTime;
 
         speed = Mathf.Sqrt(Mathf.Abs(Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("Vertical")));
     }
