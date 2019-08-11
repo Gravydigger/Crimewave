@@ -4,30 +4,25 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    /*
-    bool moveLeft;
-    bool moveRight;
-    bool moveUp;
-    bool moveDown;
-    */
-    InputController IC = InputController.instance;
+
+    InputController IC;
+    WeaponController WC;
+    public Animator animator;
 
     public float playerSpeed = 6;
+    float MouseXPos;
+    public bool isMoving = false;
+    public SpriteRenderer flip;
 
     private void Start()
     {
         IC = InputController.instance;
+        WC = WeaponController.instance;
     }
 
     void Update()
     {
-        //Keyboard Controls
 
-        /*moveLeft = Input.GetKey(KeyCode.A);
-        moveRight = Input.GetKey(KeyCode.D);
-        moveUp = Input.GetKey(KeyCode.W);
-        moveDown = Input.GetKey(KeyCode.S);
-        */
     }
 
     private void FixedUpdate()
@@ -36,11 +31,15 @@ public class CharacterMovement : MonoBehaviour
         if (IC.moveLeft)
         {
             transform.Translate(-playerSpeed * Time.fixedDeltaTime, 0, 0);
+            isMoving = true;
+            flip.flipX = true;
         }
 
         if (IC.moveRight)
         {
             transform.Translate(playerSpeed * Time.fixedDeltaTime, 0, 0);
+            isMoving = true;
+            flip.flipX = false;
         }
 
         if (IC.moveUp)
@@ -51,6 +50,38 @@ public class CharacterMovement : MonoBehaviour
         if (IC.moveDown)
         {
             transform.Translate(0, -playerSpeed * Time.fixedDeltaTime, 0);
+        }
+
+        
+        /***********************Flipping The Player***********************/
+        MouseXPos = Input.mousePosition.x - (Screen.width / 2);
+
+        if (MouseXPos > 0 && !isMoving)
+        {
+            flip.flipX = false;
+            //transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        if (MouseXPos < 0 && !isMoving)
+        {
+            flip.flipX = true;
+            //transform.rotation = Quaternion.Euler(0, 180f, 0);
+        }
+
+        else
+        {
+            isMoving = false;
+        }
+
+        /***********************Controlling the Animator***********************/
+        if (!IC.moveLeft && !IC.moveRight && !IC.moveUp && !IC.moveDown)
+        {
+            animator.SetFloat("Speed", 0);
+        }
+
+        else
+        {
+            animator.SetFloat("Speed", 1);
         }
     }
 }
