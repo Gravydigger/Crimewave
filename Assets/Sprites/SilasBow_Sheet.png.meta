@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: ebd7fccf642c3d447903d69cf93d8032
+guid: 0420925f7916ce24e9f00aedbc3e4b37
 TextureImporter:
   fileIDToRecycleName:
-    21300000: SilasBow_Sheet_0
-    21300002: SilasBow_Sheet_1
+    21300000: SilasBow_Sheet 1_0
+    21300002: SilasBow_Sheet 1_1
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -63,7 +63,7 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -74,40 +74,7 @@ TextureImporter:
   - serializedVersion: 2
     buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -119,41 +86,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SilasBow_Sheet_0
+      name: SilasBow_Sheet 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5208333, y: 0.47916666}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0bc7331d9cbc01409d84663e429be6f
+      spriteID: ab570b41e0f23c848a29bf86c0e3f8fb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilasBow_Sheet_1
+      name: SilasBow_Sheet 1_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 24
         y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5208333, y: 0.47916666}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d987bb1f32877442a0b50716b611804
+      spriteID: 9dd888a26455e23448fac8e8f5ef843c
       vertices: []
       indices: 
       edges: []
@@ -161,7 +128,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c2dbdb15a4cc6ab4092ad10b79ded3a6
+    spriteID: 46549d9a7114c044598c06cac95dd83d
     vertices: []
     indices: 
     edges: []

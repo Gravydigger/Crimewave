@@ -10,7 +10,6 @@ public class CharacterMovement : MonoBehaviour
     public Animator animator;
 
     public float playerSpeed = 6;
-    float MouseXPos;
     public bool isMoving = false;
     public SpriteRenderer flip;
 
@@ -54,15 +53,15 @@ public class CharacterMovement : MonoBehaviour
 
         
         /***********************Flipping The Player***********************/
-        MouseXPos = Input.mousePosition.x - (Screen.width / 2);
+        //MouseXCoord = Input.mousePosition.x - (Screen.width / 2);
 
-        if (MouseXPos > 0 && !isMoving)
+        if (IC.mouseXCoord >= 0 && !isMoving)
         {
             flip.flipX = false;
             //transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        if (MouseXPos < 0 && !isMoving)
+        if (IC.mouseXCoord < 0 && !isMoving)
         {
             flip.flipX = true;
             //transform.rotation = Quaternion.Euler(0, 180f, 0);
