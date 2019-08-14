@@ -5,6 +5,8 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     WeaponController WC;
+    SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite[] sprites;
 
     private Vector2 direction;
     private Vector2 currentTarget;
@@ -13,6 +15,7 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         WC = WeaponController.instance;
         currentTarget = WC.target;
     }
@@ -23,10 +26,14 @@ public class Arrow : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(transform.position, currentTarget, arrowVelocity * Time.deltaTime);
 
-        //See if the arrow has reached its destination
+        //See if the arrow has reached its destination, but hasn't collided with anything
         if (Vector3.Distance(transform.position, currentTarget) < 0.01f)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            spriteRenderer.sprite = sprites[1];
+            Destroy(GetComponent<BoxCollider2D>());
+            spriteRenderer.color = Color.Lerp(Color.white, Color.grey, 1f);//need to fix the timing
+            Destroy(gameObject, 2f);
         }
     }
 }

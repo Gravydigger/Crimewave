@@ -19,11 +19,6 @@ public class CharacterMovement : MonoBehaviour
         WC = WeaponController.instance;
     }
 
-    void Update()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         /***********************Moving the Character***********************/
