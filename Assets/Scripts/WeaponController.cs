@@ -35,9 +35,12 @@ public class WeaponController : MonoBehaviour
         transform.position = player.transform.position + offset;
 
         //Rotates to follow mouse
-        Vector2 posOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-        Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        transform.right = mouseOnScreen - posOnScreen;
+        Vector2 mousePos = Input.mousePosition;
+        Vector2 objectPos = Camera.main.WorldToScreenPoint(transform.position);
+        mousePos.x -= objectPos.x;
+        mousePos.y -= objectPos.y;
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
 
         //Sees where the mouse is, and moves the weapon in front or behind the player
         if (IC.mouseYCoord > 0)
