@@ -65,6 +65,7 @@ public class WeaponController : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             spriteRenderer.sprite = sprites[1];
+            //make it so bow cannot be spam fired
         }
 
         if (Input.GetButtonUp("Fire1"))

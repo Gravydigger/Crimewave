@@ -10,9 +10,14 @@ public class Arrow : MonoBehaviour
 
     private Vector2 direction;
     private Vector2 currentTarget;
-    public float arrowVelocity = 1;
     private Vector2 currentPos;
-    // Start is called before the first frame update
+
+    public float arrowVelocity = 1;
+    //
+    private float alpha = 0;
+    public float alphaDuration = 1;
+    public float delayDuration = 1;
+    private float delay = 0;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -29,11 +34,18 @@ public class Arrow : MonoBehaviour
         //See if the arrow has reached its destination, but hasn't collided with anything
         if (Vector3.Distance(transform.position, currentTarget) < 0.01f)
         {
-            //Destroy(gameObject);
+            //makes it appear to stick into the ground, and makes it unable to collide with anything
             spriteRenderer.sprite = sprites[1];
             Destroy(GetComponent<BoxCollider2D>());
-            spriteRenderer.color = Color.Lerp(Color.white, Color.grey, 1f);//need to fix the timing
-            Destroy(gameObject, 2f);
+
+            delay += Time.deltaTime;
+            //sees if the "decay" delay has expired
+            if (delay > delayDuration)
+            { 
+                alpha += Time.deltaTime;
+                spriteRenderer.color = Color.LerpUnclamped(Color.white, Color.clear, alpha / alphaDuration);
+                Destroy(gameObject, alphaDuration + 0.01f);
+            }
         }
     }
 }
