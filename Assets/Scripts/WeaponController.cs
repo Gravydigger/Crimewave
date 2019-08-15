@@ -15,9 +15,8 @@ public class WeaponController : MonoBehaviour
     float leftOffset;
     float rightOffset;
     private Vector3 offset;
-    public Vector3 target;
+    [HideInInspector] public Vector3 target;
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
@@ -28,7 +27,6 @@ public class WeaponController : MonoBehaviour
         rightOffset = offset.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Follows player
@@ -65,7 +63,7 @@ public class WeaponController : MonoBehaviour
         }
 
         //allows the bow to be shot
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             spriteRenderer.sprite = sprites[1];
             //make it so bow cannot be spam fired
@@ -78,8 +76,5 @@ public class WeaponController : MonoBehaviour
             target.z = 0f;
             Rigidbody2D ArrowInstance = Instantiate(arrow, transform.position, transform.rotation) as Rigidbody2D;
         }
-
-
-
     }
 }

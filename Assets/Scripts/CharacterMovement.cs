@@ -48,7 +48,6 @@ public class CharacterMovement : MonoBehaviour
 
         
         /***********************Flipping The Player***********************/
-        //MouseXCoord = Input.mousePosition.x - (Screen.width / 2);
 
         if (IC.mouseXCoord >= 0 && !isMoving)
         {

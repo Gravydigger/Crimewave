@@ -21,18 +21,7 @@ public class InputController : MonoBehaviour
     void Start()
     {
         instance = this;
-
-        //KeyCodeDatabase[Inputs.Left] = KeyCode.A;
     }
-
-    //public Dictionary<Inputs, KeyCode> KeyCodeDatabase = new Dictionary<Inputs, KeyCode>();
-
-    /*public enum Inputs
-    {
-        Left, Right, Up, Down
-    }*/
-
-
 
     void Update()
     {
