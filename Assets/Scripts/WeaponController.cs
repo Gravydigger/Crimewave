@@ -65,7 +65,7 @@ public class WeaponController : MonoBehaviour
         //allows the bow to be shot
         if (Input.GetButton("Fire1"))
         {
-            spriteRenderer.sprite = sprites[1];
+            spriteRenderer.sprite = sprites[2];
             //make it so bow cannot be spam fired
         }
 
