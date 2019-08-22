@@ -13,6 +13,7 @@ public class Arrow : MonoBehaviour
     private bool hasCollided = false;
 
     public float arrowVelocity = 1f;
+    public int arrowDamage = 1;
     //for ArrowDecay()
     private bool toggleDecay = false;
     private float alpha = 0;
@@ -62,6 +63,10 @@ public class Arrow : MonoBehaviour
 
         //See if arrow has hit an enemy
         //damaged enemy, make the enemy show it has been hit, then delete object
+        if (collision.gameObject.tag == "Enemy")
+        {
+            
+        }
     }
 
     //Turns arrows into scenery, slowly makes then invisible, and then destroys the gameObject 

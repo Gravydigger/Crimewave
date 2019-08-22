@@ -577,7 +577,7 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   - {fileID: 21300008, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   target: {x: 0, y: 0, z: 0}
-  fireDelayDuration: 0.1
+  fireDelayDuration: 0.15
 --- !u!212 &1370299222
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -654,6 +654,7 @@ GameObject:
   - component: {fileID: 1443000660}
   - component: {fileID: 1443000662}
   - component: {fileID: 1443000665}
+  - component: {fileID: 1443000666}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -674,8 +675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1443000665}
-  playerSpeed: 6
-  isMoving: 0
   flip: {fileID: 1443000663}
 --- !u!61 &1443000661
 BoxCollider2D:
@@ -805,3 +804,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1443000666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443000659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ab1829ea92a1f41b90af394196867e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 6
+  maxHealth: 6
+  currentHealth: 6
+  isDead: 0

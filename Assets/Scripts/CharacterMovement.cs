@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-
     InputController IC;
-    WeaponController WC;
+    //WeaponController WC;
+    CharacterController CC;
     public Animator animator;
 
-    public float playerSpeed = 6;
-    public bool isMoving = false;
+    private bool isMoving = false;
     public SpriteRenderer flip;
 
     private void Start()
     {
         IC = InputController.instance;
-        WC = WeaponController.instance;
+        //WC = WeaponController.instance;
+        CC = CharacterController.instance;
     }
 
     private void FixedUpdate()
@@ -24,26 +24,26 @@ public class CharacterMovement : MonoBehaviour
         /***********************Moving the Character***********************/
         if (IC.moveLeft)
         {
-            transform.Translate(-playerSpeed * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(-CC.playerSpeed * Time.fixedDeltaTime, 0, 0);
             isMoving = true;
             flip.flipX = true;
         }
 
         if (IC.moveRight)
         {
-            transform.Translate(playerSpeed * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(CC.playerSpeed * Time.fixedDeltaTime, 0, 0);
             isMoving = true;
             flip.flipX = false;
         }
 
         if (IC.moveUp)
         {
-            transform.Translate(0, playerSpeed * Time.fixedDeltaTime, 0);
+            transform.Translate(0, CC.playerSpeed * Time.fixedDeltaTime, 0);
         }
 
         if (IC.moveDown)
         {
-            transform.Translate(0, -playerSpeed * Time.fixedDeltaTime, 0);
+            transform.Translate(0, -CC.playerSpeed * Time.fixedDeltaTime, 0);
         }
 
         
