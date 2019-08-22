@@ -17,6 +17,10 @@ public class WeaponController : MonoBehaviour
     private Vector3 offset;
     [HideInInspector] public Vector3 target;
 
+    private float fireDelay = 0;
+    public float fireDelayDuration = 2;
+
+
     void Start()
     {
         instance = this;
@@ -63,18 +67,34 @@ public class WeaponController : MonoBehaviour
         }
 
         //allows the bow to be shot
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") == true)
         {
-            spriteRenderer.sprite = sprites[2];
-            //make it so bow cannot be spam fired
+            spriteRenderer.sprite = sprites[1];
+
+            //Prevents spam firing
+            fireDelay += Time.deltaTime;
         }
 
-        if (Input.GetButtonUp("Fire1"))
+        //If fireDelay is less than fireDelayDuration, don't fire an arrow
+        if (Input.GetButtonUp("Fire1") == true && fireDelay < fireDelayDuration)
         {
             spriteRenderer.sprite = sprites[0];
-            target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            target.z = 0f;
-            Rigidbody2D ArrowInstance = Instantiate(arrow, transform.position, transform.rotation) as Rigidbody2D;
+            fireDelay = 0;
+        }
+
+        //If fireDelay is equal or greater than fireDelayDuration, fire an arrow
+        if (fireDelay >= fireDelayDuration)
+        {
+            spriteRenderer.sprite = sprites[2];
+
+            if (Input.GetButtonUp("Fire1") == true)
+            {
+                spriteRenderer.sprite = sprites[0];
+                target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                target.z = 0f;
+                Rigidbody2D ArrowInstance = Instantiate(arrow, transform.position, transform.rotation) as Rigidbody2D;
+                fireDelay = 0;
+            }
         }
     }
 }

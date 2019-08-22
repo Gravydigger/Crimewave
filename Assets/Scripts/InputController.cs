@@ -15,6 +15,7 @@ public class InputController : MonoBehaviour
     public KeyCode upKey = KeyCode.W;
     public KeyCode downKey = KeyCode.S;
     public bool moveLeft, moveRight, moveUp, moveDown;
+    public bool mouseUp, mouseDown;
 
     public float mouseXCoord, mouseYCoord;
 

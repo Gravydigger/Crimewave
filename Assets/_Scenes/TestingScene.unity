@@ -521,6 +521,8 @@ MonoBehaviour:
   moveRight: 0
   moveUp: 0
   moveDown: 0
+  mouseUp: 0
+  mouseDown: 0
   mouseXCoord: 0
   mouseYCoord: 0
 --- !u!4 &1170071971
@@ -575,6 +577,7 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   - {fileID: 21300008, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   target: {x: 0, y: 0, z: 0}
+  fireDelayDuration: 0.1
 --- !u!212 &1370299222
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -612,7 +615,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -620,7 +623,7 @@ SpriteRenderer:
   m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1370299223
