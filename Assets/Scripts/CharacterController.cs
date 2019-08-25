@@ -11,15 +11,12 @@ public class CharacterController : MonoBehaviour
     public int currentHealth = 6;
     [HideInInspector] public bool isDead = false;
 
+    [SerializeField] Sprite[] healthSprites;
+
     void Start()
     {
         instance = this;
         currentHealth = maxHealth;
-    }
-
-    void Update()
-    {
-        
     }
 
     private void SetHealthUI()

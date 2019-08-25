@@ -10,7 +10,7 @@ public class WeaponController : MonoBehaviour
     public Rigidbody2D arrow;
     InputController IC;
 
-    [SerializeField] Sprite[] sprites;
+    [SerializeField] Sprite[] bowSprites;
 
     float leftOffset;
     float rightOffset;
@@ -69,7 +69,7 @@ public class WeaponController : MonoBehaviour
         //allows the bow to be shot
         if (Input.GetButton("Fire1") == true)
         {
-            spriteRenderer.sprite = sprites[1];
+            spriteRenderer.sprite = bowSprites[1];
 
             //Prevents spam firing
             fireDelay += Time.deltaTime;
@@ -78,18 +78,18 @@ public class WeaponController : MonoBehaviour
         //If fireDelay is less than fireDelayDuration, don't fire an arrow
         if (Input.GetButtonUp("Fire1") == true && fireDelay < fireDelayDuration)
         {
-            spriteRenderer.sprite = sprites[0];
+            spriteRenderer.sprite = bowSprites[0];
             fireDelay = 0;
         }
 
         //If fireDelay is equal or greater than fireDelayDuration, fire an arrow
         if (fireDelay >= fireDelayDuration)
         {
-            spriteRenderer.sprite = sprites[2];
+            spriteRenderer.sprite = bowSprites[2];
 
             if (Input.GetButtonUp("Fire1") == true)
             {
-                spriteRenderer.sprite = sprites[0];
+                spriteRenderer.sprite = bowSprites[0];
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 target.z = 0f;
                 Rigidbody2D ArrowInstance = Instantiate(arrow, transform.position, transform.rotation) as Rigidbody2D;

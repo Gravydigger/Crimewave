@@ -21,6 +21,16 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Moves the character in cardinal directions
+        MoveCharacter();
+        //Flips the player sprite depending if the player is stationary
+        FlipCharacter();
+        //controls the animator to spawn between standing and running
+        Animator();
+    }
+
+    private void MoveCharacter()
+    {
         /***********************Moving the Character***********************/
         if (IC.moveLeft)
         {
@@ -45,27 +55,30 @@ public class CharacterMovement : MonoBehaviour
         {
             transform.Translate(0, -CC.playerSpeed * Time.fixedDeltaTime, 0);
         }
+    }
 
-        
+    private void FlipCharacter()
+    {
         /***********************Flipping The Player***********************/
 
         if (IC.mouseXCoord >= 0 && !isMoving)
         {
             flip.flipX = false;
-            //transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         if (IC.mouseXCoord < 0 && !isMoving)
         {
             flip.flipX = true;
-            //transform.rotation = Quaternion.Euler(0, 180f, 0);
         }
 
         else
         {
             isMoving = false;
         }
+    }
 
+    private void Animator()
+    {
         /***********************Controlling the Animator***********************/
         if (!IC.moveLeft && !IC.moveRight && !IC.moveUp && !IC.moveDown)
         {
