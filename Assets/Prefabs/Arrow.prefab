@@ -120,13 +120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394599b688bd8d34e9238085481925f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
+  arrowSprites:
   - {fileID: 21300000, guid: 44125d147010ed041b9fd6195bb1459c, type: 3}
   - {fileID: 21300002, guid: 44125d147010ed041b9fd6195bb1459c, type: 3}
   arrowVelocity: 10
+  arrowDamage: 1
   alphaDuration: 4
   decayDelayDuration: 1
-  triggerDelayDuration: 1
 --- !u!50 &4068382498348720816
 Rigidbody2D:
   serializedVersion: 4

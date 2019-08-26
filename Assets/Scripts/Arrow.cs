@@ -6,7 +6,7 @@ public class Arrow : MonoBehaviour
 {
     WeaponController WC;
     SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite[] sprites;
+    [SerializeField] Sprite[] arrowSprites;
 
     private Vector2 currentTarget;
 
@@ -39,7 +39,7 @@ public class Arrow : MonoBehaviour
         if (Vector3.Distance(transform.position, currentTarget) < 0.01f)
         {
             //Makes it appear to stick into the ground
-            spriteRenderer.sprite = sprites[1];
+            spriteRenderer.sprite = arrowSprites[1];
             //Toggle decay
             toggleDecay = true;
         }
