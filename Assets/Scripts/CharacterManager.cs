@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CharacterController : MonoBehaviour
+public class CharacterManager : MonoBehaviour
 {
-    public static CharacterController instance;
+    public static CharacterManager instance;
 
     public float playerSpeed = 6f;
     [HideInInspector] public int maxHealth = 6;
     public int currentHealth = 6;
     [HideInInspector] public bool isDead = false;
+
+    public Image[] hearts;
 
     [SerializeField] Sprite[] healthSprites;
 
@@ -17,13 +20,28 @@ public class CharacterController : MonoBehaviour
     {
         instance = this;
         currentHealth = maxHealth;
+        SetHealthUI();
     }
 
     private void SetHealthUI()
     {
-        ////////
-        //TODO//
-        ////////
+        for (int i = 0; i < 3; i++)
+        {
+            // make a empty heart by default
+            int index = 2;
+            // make a full heart if health >= 6, 4  or 2 respectively
+            if (currentHealth >= (6-i*2))
+            {
+                index = 0;
+            }
+            // make a half heart if health == 5, 3  or 1 respectively
+            if (currentHealth == (5 - i * 2))
+            {
+                index = 1;
+            }
+            // set the correct sprite
+            hearts[i].sprite = healthSprites[index];
+        }
     }
 
     private void TakeDamage(int amount)

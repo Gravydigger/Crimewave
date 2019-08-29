@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - WallTop
   - Enemy
   layers:
   - Default
@@ -40,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 4290421103
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Cliffs
+    uniqueID: 1449235343
     locked: 0

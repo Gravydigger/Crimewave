@@ -54,8 +54,12 @@ public class Arrow : MonoBehaviour
     {
         //See if the arrow has collided with a wall or non-destroyable object
         //If so, activate ArrowDecay() and keep the arrow "embeded" into the wall/object, but keep the origional sprite
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "WallTop")
         {
+            if (collision.gameObject.tag == "WallTop")
+            {
+                spriteRenderer.sprite = arrowSprites[1];
+            }
             hasCollided = true;
             transform.Translate(Vector3.right * 0.15f, Space.Self);
             toggleDecay = true;
