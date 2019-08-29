@@ -74,9 +74,28 @@ public class CharacterManager : MonoBehaviour
 
     private void OnDeath()
     {
-        ////////
-        //TODO//
-        ////////
+        isDead = true;
+        maxHealth = 0;
     }
 
+    /***************************Dev Tools*******************************/
+
+    [ContextMenu("Player: Take 1 HP")]
+    public void Hit()
+    {
+        TakeDamage(1);
+    }
+
+    [ContextMenu("Player: Heal 1 HP")]
+    public void Heal()
+    {
+        HealHealth(1);
+    }
+
+    [ContextMenu("Player: Slay Player")]
+    public void Slay()
+    {
+        currentHealth = 1;
+        TakeDamage(1);
+    }
 }
