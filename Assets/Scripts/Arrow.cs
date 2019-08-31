@@ -61,7 +61,7 @@ public class Arrow : MonoBehaviour
                 spriteRenderer.sprite = arrowSprites[1];
             }
             hasCollided = true;
-            transform.Translate(Vector3.right * 0.15f, Space.Self);
+            transform.Translate(Vector3.right * 0.2f, Space.Self);
             toggleDecay = true;
         }
 
