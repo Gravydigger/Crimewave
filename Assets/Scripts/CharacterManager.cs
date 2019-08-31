@@ -7,6 +7,7 @@ public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
     public ParticleSystem ps;
+    public ParticleSystem explode;
 
     public float playerSpeed = 6f;
     [HideInInspector] public int maxHealth = 6;
@@ -25,7 +26,7 @@ public class CharacterManager : MonoBehaviour
         BleedAmount();
     }
 
-    private void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         //Reduces current health by the amount of damage taken, and makes sure player is not overhealed
         currentHealth -= amount;
@@ -45,7 +46,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    private void HealHealth(int amount)
+    public void HealHealth(int amount)
     {
         //Increases current health by the amount of healing done, and makes sure player is not overhealed
         currentHealth += amount;
@@ -61,8 +62,16 @@ public class CharacterManager : MonoBehaviour
 
     private void OnDeath()
     {
+        //Tells game player is dead, and makes sure he can't revive
         isDead = true;
         maxHealth = 0;
+
+        Debug.Log("Player is dead!");
+
+        ParticleSystem PlayerExplodeInstance = Instantiate(explode, transform.position, Quaternion.identity) as ParticleSystem;
+
+        //disables the player gameObject
+        gameObject.SetActive(false);
     }
 
     private void SetHealthUI()
@@ -95,32 +104,12 @@ public class CharacterManager : MonoBehaviour
             bleed.rateOverTime = Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f;
         }
 
-        //if player is at 0hp, stop the particle stsyem.
+        //if player is at 0hp, stop the particle system.
         else
         {
             ps.Stop();
         }
 
         Debug.Log("Bleed Rate: " + Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f);
-    }
-    /***************************Dev Tools*******************************/
-
-    [ContextMenu("Player: Take 1 HP")]
-    public void Hit()
-    {
-        TakeDamage(1);
-    }
-
-    [ContextMenu("Player: Heal 1 HP")]
-    public void Heal()
-    {
-        HealHealth(1);
-    }
-
-    [ContextMenu("Player: Slay Player")]
-    public void Slay()
-    {
-        currentHealth = 1;
-        TakeDamage(1);
     }
 }

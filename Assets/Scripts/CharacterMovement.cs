@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     InputController IC;
-    //WeaponController WC;
     CharacterManager CM;
     public Animator animator;
 
@@ -15,7 +14,6 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         IC = InputController.instance;
-        //WC = WeaponController.instance;
         CM = CharacterManager.instance;
     }
 

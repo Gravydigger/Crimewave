@@ -6020,9 +6020,9 @@ GameObject:
   - component: {fileID: 1443000664}
   - component: {fileID: 1443000663}
   - component: {fileID: 1443000661}
-  - component: {fileID: 1443000660}
   - component: {fileID: 1443000662}
   - component: {fileID: 1443000665}
+  - component: {fileID: 1443000660}
   - component: {fileID: 1443000666}
   m_Layer: 0
   m_Name: Player
@@ -6187,6 +6187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 1944003649}
+  explode: {fileID: 4183604009311051396, guid: c2c0e1c512a4d754b9df782ae1335b55, type: 3}
   playerSpeed: 6
   maxHealth: 6
   currentHealth: 4
@@ -7394,7 +7395,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 10
     size3D: 0
     rotation3D: 0
     gravityModifier:

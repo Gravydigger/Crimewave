@@ -9,6 +9,7 @@ public class WeaponController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D arrow;
     InputController IC;
+    CharacterManager CM;
 
     [SerializeField] Sprite[] bowSprites;
 
@@ -25,6 +26,7 @@ public class WeaponController : MonoBehaviour
     {
         instance = this;
         IC = InputController.instance;
+        CM = CharacterManager.instance;
 
         offset = transform.position - player.transform.position;
         leftOffset = -offset.x;
@@ -32,6 +34,15 @@ public class WeaponController : MonoBehaviour
     }
 
     void Update()
+    {
+        BowMovement();
+        Fire();
+
+        if (CM.isDead == true)
+            gameObject.SetActive(false);
+    }
+
+    private void BowMovement()
     {
         //Follows player
         transform.position = player.transform.position + offset;
@@ -65,7 +76,10 @@ public class WeaponController : MonoBehaviour
         {
             offset.x = rightOffset;
         }
+    }
 
+    private void Fire()
+    {
         //allows the bow to be shot
         if (Input.GetButton("Fire1") == true)
         {
@@ -92,9 +106,10 @@ public class WeaponController : MonoBehaviour
                 spriteRenderer.sprite = bowSprites[0];
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 target.z = 0f;
-                Rigidbody2D ArrowInstance = Instantiate(arrow, (transform.position + transform.right * 0.3f), transform.rotation) as Rigidbody2D;
+                Rigidbody2D ArrowInstance = Instantiate(arrow, transform.position + transform.right * 0.3f, transform.rotation) as Rigidbody2D;
                 fireDelay = 0;
             }
         }
     }
+
 }
