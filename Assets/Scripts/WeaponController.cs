@@ -92,7 +92,7 @@ public class WeaponController : MonoBehaviour
                 spriteRenderer.sprite = bowSprites[0];
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 target.z = 0f;
-                Rigidbody2D ArrowInstance = Instantiate(arrow, transform.position, transform.rotation) as Rigidbody2D;
+                Rigidbody2D ArrowInstance = Instantiate(arrow, (transform.position + transform.right * 0.3f), transform.rotation) as Rigidbody2D;
                 fireDelay = 0;
             }
         }
