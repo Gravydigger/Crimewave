@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
-    public ParticleSystem ps;
+
+    public ParticleSystem bleed;
+    public ParticleSystem playerHitEffect;
     public ParticleSystem explode;
+
+    public AudioSource playerHurt;
 
     public float playerSpeed = 6f;
     [HideInInspector] public int maxHealth = 6;
@@ -36,8 +40,12 @@ public class CharacterManager : MonoBehaviour
         //Changes the UI elements appropriately 
         SetHealthUI();
         
-        //Changes the bleed rate of player
+        //Changes the bleed rate of player and emmits a hit particle effect
         BleedAmount();
+        playerHitEffect.Play();
+
+        //play hit sound
+        playerHurt.Play();
 
         //If player has 0 or negitive hp, call OnDeath()
         if (currentHealth <= 0 && !isDead)
@@ -97,17 +105,17 @@ public class CharacterManager : MonoBehaviour
 
     private void BleedAmount()
     {
-        var bleed = ps.emission;
+        var bleedRate = bleed.emission;
         //if player is at 0hp and is not at full health, make them bleed
         if (currentHealth != 0)
         {
-            bleed.rateOverTime = Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f;
+            bleedRate.rateOverTime = Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f;
         }
 
         //if player is at 0hp, stop the particle system.
         else
         {
-            ps.Stop();
+            bleed.Stop();
         }
 
         Debug.Log("Bleed Rate: " + Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f);
