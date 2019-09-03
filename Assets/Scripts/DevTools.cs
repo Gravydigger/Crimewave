@@ -7,13 +7,17 @@ public class DevTools : MonoBehaviour
     CharacterManager CM;
     WeaponController WC;
     InputController IC;
+    DialogueTrigger DT;
+    DialogueManager DM;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         CM = CharacterManager.instance;
         WC = WeaponController.instance;
         IC = InputController.instance;
+        DT = DialogueTrigger.instance;
+        DM = DialogueManager.instance;
     }
 
     private void Update()
@@ -26,28 +30,42 @@ public class DevTools : MonoBehaviour
                 Heal();
             if (Input.GetKeyDown(KeyCode.U))
                 Slay();
+            if (Input.GetKeyDown(KeyCode.H))
+                TriggerDialouge();
+            if (Input.GetKeyDown(KeyCode.J))
+                NextSentence();
         }
     }
 
     [ContextMenu("Player: Take 1 HP")]
-    public void Hit()
+    private void Hit()
     {
         CM.TakeDamage(1);
         Debug.Log("Player: Take 1 HP");
     }
 
     [ContextMenu("Player: Heal 1 HP")]
-    public void Heal()
+    private void Heal()
     {
         CM.HealHealth(1);
         Debug.Log("Player: Heal 1 HP");
     }
 
     [ContextMenu("Player: Slay Player")]
-    public void Slay()
+    private void Slay()
     {
         CM.currentHealth = 1;
         CM.TakeDamage(1);
         Debug.Log("Player: Slay Player");
+    }
+
+    private void TriggerDialouge()
+    {
+        DT.TriggerDialouge();
+    }
+
+    private void NextSentence()
+    {
+        DM.DisplayNextSentence();
     }
 }
