@@ -14,7 +14,8 @@ public class InputController : MonoBehaviour
     public KeyCode rightKey = KeyCode.D;
     public KeyCode upKey = KeyCode.W;
     public KeyCode downKey = KeyCode.S;
-    public bool moveLeft, moveRight, moveUp, moveDown;
+    public KeyCode spaceBar = KeyCode.Space;
+    public bool moveLeft, moveRight, moveUp, moveDown, skip;
     public bool mouseFire;
 
     public float mouseXCoord, mouseYCoord;
@@ -37,6 +38,8 @@ public class InputController : MonoBehaviour
         mouseXCoord = Input.mousePosition.x - (Screen.width / 2);
         mouseYCoord = Input.mousePosition.y - (Screen.height / 2);
 
+        /*~~~~~~~~~~~~~~~~~Dialouge~~~~~~~~~~~~~~~~~*/
+        skip = Input.GetKey(spaceBar);
         //use this to allow the player to change the keybinds (WIP)
         //string s  = Input.inputString;
     }

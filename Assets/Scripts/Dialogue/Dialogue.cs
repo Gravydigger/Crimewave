@@ -6,9 +6,11 @@ using UnityEngine;
 public class Dialogue
 {
 
+
     public string nameIdentifier;
 
     [TextArea(1, 3)]
     public string[] sentences;
 
+    public float[] sentenceDisplayTime;
 }
