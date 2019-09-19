@@ -5,6 +5,7 @@ using UnityEngine;
 public class DevTools : MonoBehaviour
 {
     CharacterManager CM;
+    EnemyManager EM;
     WeaponController WC;
     InputController IC;
     DialogueTrigger DT;
@@ -14,6 +15,7 @@ public class DevTools : MonoBehaviour
     private void Start()
     {
         CM = CharacterManager.instance;
+        EM = EnemyManager.instance;
         WC = WeaponController.instance;
         IC = InputController.instance;
         DT = DialogueTrigger.instance;

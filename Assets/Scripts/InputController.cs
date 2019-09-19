@@ -42,5 +42,10 @@ public class InputController : MonoBehaviour
         skip = Input.GetKey(spaceBar);
         //use this to allow the player to change the keybinds (WIP)
         //string s  = Input.inputString;
+
+        /********************Enemy Controls******************/
+        /*~~~~~~~~~~~~~~~~~Player Detection~~~~~~~~~~~~~~~~~*/
+
     }
+
 }

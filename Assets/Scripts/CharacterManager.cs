@@ -7,6 +7,8 @@ public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
 
+    EnemyMovement EM;
+
     public ParticleSystem bleed;
     public ParticleSystem playerHitEffect;
     public ParticleSystem explode;
@@ -17,10 +19,18 @@ public class CharacterManager : MonoBehaviour
     [HideInInspector] public int maxHealth = 6;
     public int currentHealth = 6;
     [HideInInspector] public bool isDead = false;
+    public Vector3 playerPosition;
 
+    public float invincibilityDuration = 1f;
+    public float invincibilityDelay = 0f;
+    public bool isInvincible = false;
+
+    public Vector3 knockbackDirection;
+    public float knockbackDistance = 3f;
     public Image[] hearts;
 
     [SerializeField] Sprite[] healthSprites;
+    private SpriteRenderer playerSprite;
 
     void Start()
     {
@@ -28,15 +38,39 @@ public class CharacterManager : MonoBehaviour
         currentHealth = maxHealth;
         SetHealthUI();
         BleedAmount();
+        playerSprite = GetComponent<SpriteRenderer>();
+        EM = EnemyMovement.instance;
+    }
+
+    private void Update()
+    {
+        playerPosition = transform.position;
+        if (isInvincible)
+            Invincibility();
+
+        if (invincibilityDelay > 0)
+        {
+            playerSprite.enabled = Mathf.Sin(invincibilityDelay * 30f) < 0;
+        }
+        else
+        {
+            playerSprite.enabled = true;
+        }
     }
 
     public void TakeDamage(int amount)
     {
+        //If the player in invincible, don't deal dmg
+        if (isInvincible)
+            return;
         //Reduces current health by the amount of damage taken, and makes sure player is not overhealed
         currentHealth -= amount;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
 
+        KnockBack();
+
+        isInvincible = true;
         //Changes the UI elements appropriately 
         SetHealthUI();
         
@@ -66,6 +100,25 @@ public class CharacterManager : MonoBehaviour
 
         //Changes the bleed rate of player
         BleedAmount();
+    }
+
+    public void Invincibility()
+    {
+        //shows how long the player is invincible
+        invincibilityDelay += Time.deltaTime;
+        if (invincibilityDelay > invincibilityDuration)
+        {
+            isInvincible = false;
+            invincibilityDelay = 0f;
+        }
+    }
+
+    public void KnockBack()
+    {
+        knockbackDirection = playerPosition - EM.enemyPos;
+        knockbackDirection.Normalize();
+        knockbackDirection.z = 0;
+        transform.position += knockbackDirection * knockbackDistance;
     }
 
     private void OnDeath()
