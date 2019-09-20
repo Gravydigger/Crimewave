@@ -15,9 +15,13 @@ public class CharacterMovement : MonoBehaviour
     private bool isMoving = false;
     public SpriteRenderer flip;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
         IC = InputController.instance;
         //CMG = CharacterManager.instance;
     }

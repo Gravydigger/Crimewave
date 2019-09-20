@@ -19,12 +19,16 @@ public class EnemyManager : MonoBehaviour
     public bool detectPlayer = false;
     [HideInInspector] public bool isDead = false;
 
-    void Start()
+    private void Awake()
     {
         instance = this;
+        currentHealth = maxHealth;
+    }
+
+    void Start()
+    {
         CM = CharacterManager.instance;
 
-        currentHealth = maxHealth;
     }
 
     //If player enters its visual arc, chase player
@@ -47,7 +51,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {

@@ -26,18 +26,25 @@ public class CharacterManager : MonoBehaviour
 
     public Vector3 knockbackDirection;
     public float knockbackDistance = 3f;
+    new Rigidbody2D rigidbody;
+
     public Image[] hearts;
 
     [SerializeField] Sprite[] healthSprites;
     private SpriteRenderer playerSprite;
 
-    void Start()
+    private void Awake()
     {
         instance = this;
+        playerSprite = GetComponent<SpriteRenderer>();
+        rigidbody = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         SetHealthUI();
         BleedAmount();
-        playerSprite = GetComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
         EMV = EnemyMovement.instance;
         CMV = CharacterMovement.instance;
     }
@@ -117,7 +124,9 @@ public class CharacterManager : MonoBehaviour
         knockbackDirection = CMV.playerPosition - EMV.enemyPos;
         knockbackDirection.Normalize();
         knockbackDirection.z = 0;
-        transform.position += knockbackDirection * knockbackDistance;
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.AddForce(knockbackDirection * knockbackDistance, ForceMode2D.Impulse);
+        //transform.position += knockbackDirection * knockbackDistance;
     }
 
     private void OnDeath()

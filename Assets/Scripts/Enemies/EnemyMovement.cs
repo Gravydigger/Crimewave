@@ -14,9 +14,13 @@ public class EnemyMovement : MonoBehaviour
     public SpriteRenderer flip;
     public Vector3 enemyPos;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
         //IC = InputController.instance;
         EMG = EnemyManager.instance;
         CMV = CharacterMovement.instance;

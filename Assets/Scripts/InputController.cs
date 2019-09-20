@@ -20,7 +20,7 @@ public class InputController : MonoBehaviour
 
     public float mouseXCoord, mouseYCoord;
 
-    void Start()
+    void Awake()
     {
         instance = this;
     }
