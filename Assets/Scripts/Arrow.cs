@@ -34,6 +34,7 @@ public class Arrow : MonoBehaviour
         EM = EnemyManager.instance;
         WC = WeaponController.instance;
         CM = CharacterMovement.instance;
+        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), CM.GetComponent<BoxCollider2D>());
         currentTarget = WC.target;
         firedFrom = CM.playerPosition;
     }
@@ -59,7 +60,7 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         //See if the arrow has collided with a wall or non-destroyable object
         //If so, activate ArrowDecay() and keep the arrow "embeded" into the wall/object, but keep the origional sprite
@@ -76,7 +77,7 @@ public class Arrow : MonoBehaviour
 
         //See if arrow has hit an enemy
         //If so, damaged the enemy and then delete gameObject
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")// && targetRigidbody != null)
         {
             EM.TakeDamage(arrowDamage, transform.position, firedFrom);
             Destroy(gameObject);
