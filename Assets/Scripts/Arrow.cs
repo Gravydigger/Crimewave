@@ -5,6 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     WeaponController WC;
+    EnemyManager EM;
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] arrowSprites;
 
@@ -13,7 +14,7 @@ public class Arrow : MonoBehaviour
     private bool hasCollided = false;
 
     public float arrowVelocity = 1f;
-    public int arrowDamage = 1;
+    public int arrowDamage = 2;
     //for ArrowDecay()
     private bool toggleDecay = false;
     private float alpha = 0;
@@ -24,6 +25,7 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        EM = EnemyManager.instance;
         WC = WeaponController.instance;
         currentTarget = WC.target;
     }
@@ -66,10 +68,11 @@ public class Arrow : MonoBehaviour
         }
 
         //See if arrow has hit an enemy
-        //damaged enemy, make the enemy show it has been hit, then delete object
+        //If so, damaged the enemy and then delete gameObject
         if (collision.gameObject.tag == "Enemy")
         {
-            
+            EM.TakeDamage(arrowDamage);
+            Destroy(gameObject);
         }
     }
 

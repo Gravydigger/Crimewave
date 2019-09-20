@@ -7,10 +7,9 @@ public class EnemyMovement : MonoBehaviour
     public static EnemyMovement instance;
 
     //InputController IC;
-    EnemyManager EMG;
-    CharacterMovement CMV;
+    EnemyManager EM;
+    CharacterMovement CM;
 
-    private bool isMoving = false;
     public SpriteRenderer flip;
     public Vector3 enemyPos;
 
@@ -22,14 +21,14 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         //IC = InputController.instance;
-        EMG = EnemyManager.instance;
-        CMV = CharacterMovement.instance;
+        EM = EnemyManager.instance;
+        CM = CharacterMovement.instance;
     }
 
     private void Update()
     {
         //Moves the enemy in cardinal directions if it sees the player
-        if (EMG.detectPlayer)
+        if (EM.detectPlayer)
         {
             MoveEnemy();
         }
@@ -41,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void MoveEnemy()
     {
-        transform.position = Vector2.MoveTowards(transform.position, CMV.playerPosition, EMG.enemySpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, CM.playerPosition, EM.enemySpeed * Time.deltaTime);
     }
 
     /*private void FlipEnemy()

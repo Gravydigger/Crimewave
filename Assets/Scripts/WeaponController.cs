@@ -21,16 +21,18 @@ public class WeaponController : MonoBehaviour
     private float fireDelay = 0;
     public float fireDelayDuration = 2;
 
-
-    void Start()
+    private void Awake()
     {
         instance = this;
-        IC = InputController.instance;
-        CM = CharacterManager.instance;
-
         offset = transform.position - player.transform.position;
         leftOffset = -offset.x;
         rightOffset = offset.x;
+    }
+
+    void Start()
+    {
+        IC = InputController.instance;
+        CM = CharacterManager.instance;
     }
 
     void Update()

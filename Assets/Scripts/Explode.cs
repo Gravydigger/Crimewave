@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Explode : MonoBehaviour
 {
+    public float particleLifetime = 10f;
+
     void Update()
     {
+        
         //Replace "10f" with the particles lifetime
-        Destroy(gameObject, 10f + 0.1f);
+        Destroy(gameObject, particleLifetime + 0.1f);
     }
 }

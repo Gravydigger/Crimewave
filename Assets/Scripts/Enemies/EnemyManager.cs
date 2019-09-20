@@ -37,7 +37,7 @@ public class EnemyManager : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             detectPlayer = true;
-            Debug.Log("Player Detected.");
+            //Debug.Log("Player Detected.");
         }
     }
     
@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             detectPlayer = false;
-            Debug.Log("Player Lost.");
+            //Debug.Log("Player Lost.");
         }
     }
 
@@ -61,10 +61,12 @@ public class EnemyManager : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        //Reduces current health by the amount of damage taken, and makes sure the enemy is not overhealed
-        currentHealth -= amount;
+        //Makes sure the player is not overhealed
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
+
+        //reduces current health by the amount of damage taken
+        currentHealth -= amount;
 
         //Emits a hit particle effect
         enemyHitEffect.Play();
@@ -97,7 +99,7 @@ public class EnemyManager : MonoBehaviour
 
         ParticleSystem EnemyExplodeInstance = Instantiate(explode, transform.position, Quaternion.identity) as ParticleSystem;
 
-        //disables the enemy gameObject
-        gameObject.SetActive(false);
+        //destroys the enemy gameObject
+        Destroy(gameObject);
     }
 }

@@ -7,8 +7,8 @@ public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
 
-    EnemyMovement EMV;
-    CharacterMovement CMV;
+    EnemyMovement EM;
+    CharacterMovement CM;
 
     public ParticleSystem bleed;
     public ParticleSystem playerHitEffect;
@@ -45,8 +45,8 @@ public class CharacterManager : MonoBehaviour
 
     void Start()
     {
-        EMV = EnemyMovement.instance;
-        CMV = CharacterMovement.instance;
+        EM = EnemyMovement.instance;
+        CM = CharacterMovement.instance;
     }
 
     private void Update()
@@ -69,11 +69,15 @@ public class CharacterManager : MonoBehaviour
         //If the player in invincible, don't deal dmg
         if (isInvincible)
             return;
-        //Reduces current health by the amount of damage taken, and makes sure player is not overhealed
-        currentHealth -= amount;
+
+        //Makes sure the player is not overhealed
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
 
+        //reduces current health by the amount of damage taken
+        currentHealth -= amount;
+
+        //Knocks the player back a distance
         KnockBack();
 
         isInvincible = true;
@@ -121,7 +125,7 @@ public class CharacterManager : MonoBehaviour
 
     public void KnockBack()
     {
-        knockbackDirection = CMV.playerPosition - EMV.enemyPos;
+        knockbackDirection = CM.playerPosition - EM.enemyPos;
         knockbackDirection.Normalize();
         knockbackDirection.z = 0;
         rigidbody.velocity = Vector2.zero;
@@ -179,6 +183,6 @@ public class CharacterManager : MonoBehaviour
             bleed.Stop();
         }
 
-        Debug.Log("Bleed Rate: " + Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f);
+        //Debug.Log("Bleed Rate: " + Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f);
     }
 }
