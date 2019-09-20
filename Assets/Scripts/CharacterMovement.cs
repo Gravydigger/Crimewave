@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    public static CharacterMovement instance;
+
     InputController IC;
-    CharacterManager CM;
+    //CharacterManager CMG;
     public Animator animator;
 
+    public Vector3 playerPosition;
+    public float playerSpeed = 6f;
     private bool isMoving = false;
     public SpriteRenderer flip;
 
     private void Start()
     {
+        instance = this;
         IC = InputController.instance;
-        CM = CharacterManager.instance;
+        //CMG = CharacterManager.instance;
+    }
+
+    private void Update()
+    {
+        playerPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
+
         //Moves the character in cardinal directions
         MoveCharacter();
         //Flips the player sprite depending if the player is stationary
@@ -32,26 +43,26 @@ public class CharacterMovement : MonoBehaviour
         /***********************Moving the Character***********************/
         if (IC.moveLeft)
         {
-            transform.Translate(-CM.playerSpeed * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(-playerSpeed * Time.fixedDeltaTime, 0, 0);
             isMoving = true;
             flip.flipX = true;
         }
 
         if (IC.moveRight)
         {
-            transform.Translate(CM.playerSpeed * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(playerSpeed * Time.fixedDeltaTime, 0, 0);
             isMoving = true;
             flip.flipX = false;
         }
 
         if (IC.moveUp)
         {
-            transform.Translate(0, CM.playerSpeed * Time.fixedDeltaTime, 0);
+            transform.Translate(0, playerSpeed * Time.fixedDeltaTime, 0);
         }
 
         if (IC.moveDown)
         {
-            transform.Translate(0, -CM.playerSpeed * Time.fixedDeltaTime, 0);
+            transform.Translate(0, -playerSpeed * Time.fixedDeltaTime, 0);
         }
     }
 

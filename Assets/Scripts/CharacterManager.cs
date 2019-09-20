@@ -7,7 +7,8 @@ public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
 
-    EnemyMovement EM;
+    EnemyMovement EMV;
+    CharacterMovement CMV;
 
     public ParticleSystem bleed;
     public ParticleSystem playerHitEffect;
@@ -15,11 +16,9 @@ public class CharacterManager : MonoBehaviour
 
     public AudioSource playerHurt;
 
-    public float playerSpeed = 6f;
     [HideInInspector] public int maxHealth = 6;
     public int currentHealth = 6;
     [HideInInspector] public bool isDead = false;
-    public Vector3 playerPosition;
 
     public float invincibilityDuration = 1f;
     public float invincibilityDelay = 0f;
@@ -39,12 +38,12 @@ public class CharacterManager : MonoBehaviour
         SetHealthUI();
         BleedAmount();
         playerSprite = GetComponent<SpriteRenderer>();
-        EM = EnemyMovement.instance;
+        EMV = EnemyMovement.instance;
+        CMV = CharacterMovement.instance;
     }
 
     private void Update()
     {
-        playerPosition = transform.position;
         if (isInvincible)
             Invincibility();
 
@@ -115,7 +114,7 @@ public class CharacterManager : MonoBehaviour
 
     public void KnockBack()
     {
-        knockbackDirection = playerPosition - EM.enemyPos;
+        knockbackDirection = CMV.playerPosition - EMV.enemyPos;
         knockbackDirection.Normalize();
         knockbackDirection.z = 0;
         transform.position += knockbackDirection * knockbackDistance;
