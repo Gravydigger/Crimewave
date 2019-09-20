@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
     CharacterManager CM;
+    EnemyMovement EM;
 
     public ParticleSystem enemyHitEffect;
     public ParticleSystem explode;
@@ -16,6 +17,10 @@ public class EnemyManager : MonoBehaviour
     public int maxHealth = 2;
     public int currentHealth = 1;
     public int damageAmount = 1;
+    public float knockbackDistance = 3f;
+    new Rigidbody2D rigidbody;
+
+
     public bool detectPlayer = false;
     [HideInInspector] public bool isDead = false;
 
@@ -23,12 +28,13 @@ public class EnemyManager : MonoBehaviour
     {
         instance = this;
         currentHealth = maxHealth;
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Start()
     {
+        EM = EnemyMovement.instance;
         CM = CharacterManager.instance;
-
     }
 
     //If player enters its visual arc, chase player
@@ -59,7 +65,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Vector2 arrowPos, Vector2 firedFrom)
     {
         //Makes sure the player is not overhealed
         if (currentHealth > maxHealth)
@@ -67,6 +73,9 @@ public class EnemyManager : MonoBehaviour
 
         //reduces current health by the amount of damage taken
         currentHealth -= amount;
+
+        //Knocks back the enemy
+        KnockBack(arrowPos);
 
         //Emits a hit particle effect
         enemyHitEffect.Play();
@@ -79,6 +88,14 @@ public class EnemyManager : MonoBehaviour
         {
             OnDeath();
         }
+    }
+
+    public void KnockBack(Vector3 arrowPos)
+    {
+        Vector2 knockbackDirection = EM.enemyPos - arrowPos;
+        knockbackDirection.Normalize();
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.AddForce(knockbackDirection * knockbackDistance, ForceMode2D.Impulse);
     }
 
     public void HealHealth(int amount)

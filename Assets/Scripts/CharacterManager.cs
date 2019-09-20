@@ -24,7 +24,6 @@ public class CharacterManager : MonoBehaviour
     public float invincibilityDelay = 0f;
     public bool isInvincible = false;
 
-    public Vector3 knockbackDirection;
     public float knockbackDistance = 3f;
     new Rigidbody2D rigidbody;
 
@@ -125,12 +124,10 @@ public class CharacterManager : MonoBehaviour
 
     public void KnockBack()
     {
-        knockbackDirection = CM.playerPosition - EM.enemyPos;
+        Vector2 knockbackDirection = CM.playerPosition - EM.enemyPos;
         knockbackDirection.Normalize();
-        knockbackDirection.z = 0;
         rigidbody.velocity = Vector2.zero;
         rigidbody.AddForce(knockbackDirection * knockbackDistance, ForceMode2D.Impulse);
-        //transform.position += knockbackDirection * knockbackDistance;
     }
 
     private void OnDeath()

@@ -6508,7 +6508,6 @@ MonoBehaviour:
   invincibilityDuration: 1
   invincibilityDelay: 0
   isInvincible: 0
-  knockbackDirection: {x: 0, y: 0, z: 0}
   knockbackDistance: 3
   hearts:
   - {fileID: 1942037619}
@@ -12283,6 +12282,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181340379301572317, guid: cd615e8b8be3b024fbde84883a804b99,
+        type: 3}
+      propertyPath: maxHealth
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd615e8b8be3b024fbde84883a804b99, type: 3}

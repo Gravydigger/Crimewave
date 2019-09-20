@@ -12,9 +12,13 @@ public class EnemyMovement : MonoBehaviour
 
     public SpriteRenderer flip;
     public Vector3 enemyPos;
+    public Vector2 target;
+    private bool isMoving = false;
+    private new Rigidbody2D rigidbody;
 
     private void Awake()
     {
+        rigidbody = GetComponent<Rigidbody2D>();
         instance = this;
     }
 
@@ -30,36 +34,35 @@ public class EnemyMovement : MonoBehaviour
         //Moves the enemy in cardinal directions if it sees the player
         if (EM.detectPlayer)
         {
-            MoveEnemy();
+            target = CM.playerPosition;
+            MoveEnemy(target);
         }
 
         enemyPos = transform.position;
         //Flips the enemy sprite depending if the enemy is stationary
-        //FlipEnemy();
+        FlipEnemy();
     }
 
-    private void MoveEnemy()
+    private void MoveEnemy(Vector2 target)
     {
-        transform.position = Vector2.MoveTowards(transform.position, CM.playerPosition, EM.enemySpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, EM.enemySpeed * Time.deltaTime);
     }
 
-    /*private void FlipEnemy()
+    private void FlipEnemy()
     {
-        
-
-        if (IC.mouseXCoord >= 0 && !isMoving)
-        {
-            flip.flipX = false;
-        }
-
-        if (IC.mouseXCoord < 0 && !isMoving)
+        if (rigidbody.velocity.x > 0 && !isMoving)
         {
             flip.flipX = true;
         }
 
-        else
+        if (rigidbody.velocity.x < 0 && !isMoving)
+        {
+            flip.flipX = false;
+        }
+
+        else if (rigidbody.velocity.x == 0)
         {
             isMoving = false;
         }
-    }*/
+    }
 }

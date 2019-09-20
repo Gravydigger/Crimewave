@@ -6,10 +6,12 @@ public class Arrow : MonoBehaviour
 {
     WeaponController WC;
     EnemyManager EM;
+    CharacterMovement CM;
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] arrowSprites;
 
     private Vector2 currentTarget;
+    private Vector2 firedFrom;
 
     private bool hasCollided = false;
 
@@ -22,15 +24,20 @@ public class Arrow : MonoBehaviour
     public float decayDelayDuration = 1f;
     private float decayDelay = 0;
 
-    void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        EM = EnemyManager.instance;
-        WC = WeaponController.instance;
-        currentTarget = WC.target;
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        EM = EnemyManager.instance;
+        WC = WeaponController.instance;
+        CM = CharacterMovement.instance;
+        currentTarget = WC.target;
+        firedFrom = CM.playerPosition;
+    }
+
     void Update()
     {
         //Make arrow travel toward where the mouse was released, provided it has not collided with anything
@@ -71,7 +78,7 @@ public class Arrow : MonoBehaviour
         //If so, damaged the enemy and then delete gameObject
         if (collision.gameObject.tag == "Enemy")
         {
-            EM.TakeDamage(arrowDamage);
+            EM.TakeDamage(arrowDamage, transform.position, firedFrom);
             Destroy(gameObject);
         }
     }
