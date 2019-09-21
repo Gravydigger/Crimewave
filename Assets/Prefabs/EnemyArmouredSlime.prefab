@@ -9813,11 +9813,11 @@ MonoBehaviour:
   explode: {fileID: 5538298840699518534}
   enemyHurt: {fileID: 6683073168178549887}
   enemySpeed: 2.5
-  maxHealth: 6
+  maxHealth: 4
   currentHealth: 0
   damageAmount: 1
   knockbackDistance: 0.5
-  rigidbody: {fileID: 6683073168178549877}
+  gotHitFrom: {x: 0, y: 0}
   detectPlayer: 0
   isDead: 0
 --- !u!114 &6683073168178549872
@@ -9833,6 +9833,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  flip: {fileID: 6683073168178549875}
   enemyPos: {x: 0, y: 0, z: 0}
   target: {x: 0, y: 0}
+  direction: 0

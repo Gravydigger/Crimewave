@@ -88,6 +88,13 @@ public class CharacterManager : MonoBehaviour
         //Changes the bleed rate of player and emmits a hit particle effect
         BleedAmount();
 
+        if (currentHealth > 0 && !isDead)
+        {
+            ParticleSystem HitInstance = Instantiate(playerHitEffect, transform.position, transform.rotation) as ParticleSystem;
+            HitInstance.Play();
+            Destroy(HitInstance.gameObject, HitInstance.main.duration + 0.1f);
+        }
+
         //play hit sound
         playerHurt.Play();
 

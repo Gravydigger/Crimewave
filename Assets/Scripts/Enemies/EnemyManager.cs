@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
     public int currentHealth = 1;
     public int damageAmount = 1;
     public float knockbackDistance = 3f;
-    public new Rigidbody2D rigidbody;
+    private new Rigidbody2D rigidbody;
 
     [HideInInspector] public Vector2 gotHitFrom;
 
