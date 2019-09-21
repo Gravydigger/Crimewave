@@ -4805,7 +4805,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181340378346273281}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5630,7 +5630,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9808,6 +9808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd432577ba2c3b743abd6887da2719e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   enemyHitEffect: {fileID: 1181340378346273340}
   explode: {fileID: 1710769389}
   enemyHurt: {fileID: 1181340379301572308}
@@ -9831,6 +9832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4716027457a30ab4d8c2dc107924c6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   flip: {fileID: 1181340379301572312}
   enemyPos: {x: 0, y: 0, z: 0}
   target: {x: 0, y: 0}

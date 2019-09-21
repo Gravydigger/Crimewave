@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public EnemyManager instance;
+    [HideInInspector] public EnemyManager instance;
     //CharacterManager CM;
     EnemyMovement EM;
 
@@ -20,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     public float knockbackDistance = 3f;
     public new Rigidbody2D rigidbody;
 
+    [HideInInspector] public Vector2 gotHitFrom;
 
     public bool detectPlayer = false;
     [HideInInspector] public bool isDead = false;
@@ -78,8 +79,16 @@ public class EnemyManager : MonoBehaviour
         //Knocks back the enemy
         KnockBack(arrowPos);
 
-        //Emits a hit particle effect
-        enemyHitEffect.Play();
+        //send where the arrow was fired from to EMV
+        gotHitFrom = firedFrom;
+
+        //Emits a hit particle effect if the enemy is not dead
+        if (currentHealth > 0 && !isDead)
+        {
+            ParticleSystem HitInstance = Instantiate(enemyHitEffect, transform.position, transform.rotation) as ParticleSystem;
+            HitInstance.Play();
+            Destroy(HitInstance.gameObject, HitInstance.main.duration + 0.1f);
+        }
 
         //play hit sound
         enemyHurt.Play();
@@ -115,7 +124,7 @@ public class EnemyManager : MonoBehaviour
 
         Debug.Log(gameObject.name + " has died.");
 
-        //unparents the explode particle effect, plays the particla effect, then destroys it once it has finished
+        //unparents the explode particle effect, plays the particle effect, then destroys it once it has finished
         explode.transform.parent = null;
         explode.Play();
         Destroy(explode.gameObject, explode.main.duration + 0.1f);

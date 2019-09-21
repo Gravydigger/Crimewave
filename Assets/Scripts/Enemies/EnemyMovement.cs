@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public EnemyMovement instance;
+    [HideInInspector] public EnemyMovement instance;
 
     EnemyManager EM;
     CharacterMovement CM;
@@ -34,6 +34,18 @@ public class EnemyMovement : MonoBehaviour
         {
             target = CM.playerPosition;
             MoveEnemy(target);
+            EM.gotHitFrom = Vector2.zero;
+        }
+
+        //Moves to where it was shot from if It cannot see the player currently
+        else if (EM.gotHitFrom != Vector2.zero)
+        {
+            target = EM.gotHitFrom;
+            MoveEnemy(target);
+            if (Vector2.Distance(transform.position, target) < 0.01f)
+            {
+                EM.gotHitFrom = Vector2.zero;
+            }
         }
 
         enemyPos = transform.position;
@@ -41,6 +53,7 @@ public class EnemyMovement : MonoBehaviour
         FlipEnemy();
     }
 
+    //Makes the enemy move towards a target (will be replaced with pathfinding code)
     private void MoveEnemy(Vector2 target)
     {
         transform.position = Vector2.MoveTowards(transform.position, target, EM.enemySpeed * Time.deltaTime);
