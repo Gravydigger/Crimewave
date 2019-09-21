@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public static EnemyManager instance;
-    CharacterManager CM;
+    public EnemyManager instance;
+    //CharacterManager CM;
     EnemyMovement EM;
 
     public ParticleSystem enemyHitEffect;
@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
     public int currentHealth = 1;
     public int damageAmount = 1;
     public float knockbackDistance = 3f;
-    new Rigidbody2D rigidbody;
+    public new Rigidbody2D rigidbody;
 
 
     public bool detectPlayer = false;
@@ -29,12 +29,12 @@ public class EnemyManager : MonoBehaviour
         instance = this;
         currentHealth = maxHealth;
         rigidbody = GetComponent<Rigidbody2D>();
+        EM = GetComponent<EnemyMovement>();
     }
 
     void Start()
     {
-        EM = EnemyMovement.instance;
-        CM = CharacterManager.instance;
+        //CM = CharacterManager.instance;
     }
 
     //If player enters its visual arc, chase player
@@ -61,7 +61,8 @@ public class EnemyManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            CM.TakeDamage(damageAmount);
+            CharacterManager CM = collision.gameObject.GetComponent<CharacterManager>();
+            CM.TakeDamage(damageAmount, rigidbody);
         }
     }
 
@@ -112,9 +113,12 @@ public class EnemyManager : MonoBehaviour
         isDead = true;
         maxHealth = 0;
 
-        Debug.Log("Enemy has died.");
+        Debug.Log(gameObject.name + " has died.");
 
-        ParticleSystem EnemyExplodeInstance = Instantiate(explode, transform.position, Quaternion.identity) as ParticleSystem;
+        //unparents the explode particle effect, plays the particla effect, then destroys it once it has finished
+        explode.transform.parent = null;
+        explode.Play();
+        Destroy(explode.gameObject, explode.main.duration + 0.1f);
 
         //destroys the enemy gameObject
         Destroy(gameObject);

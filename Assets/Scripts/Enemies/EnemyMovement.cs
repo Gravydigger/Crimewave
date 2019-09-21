@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public static EnemyMovement instance;
+    public EnemyMovement instance;
 
-    //InputController IC;
     EnemyManager EM;
     CharacterMovement CM;
 
@@ -24,13 +23,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        //IC = InputController.instance;
-        EM = EnemyManager.instance;
         CM = CharacterMovement.instance;
     }
 
     private void Update()
     {
+        EM = GetComponent<EnemyManager>();
         //Moves the enemy in cardinal directions if it sees the player
         if (EM.detectPlayer)
         {

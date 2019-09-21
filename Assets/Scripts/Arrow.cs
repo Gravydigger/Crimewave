@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     WeaponController WC;
-    EnemyManager EM;
+    //EnemyManager EM;
     CharacterMovement CM;
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] arrowSprites;
@@ -31,7 +31,7 @@ public class Arrow : MonoBehaviour
 
     void Start()
     {
-        EM = EnemyManager.instance;
+        //EM = EnemyManager.instance;
         WC = WeaponController.instance;
         CM = CharacterMovement.instance;
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), CM.GetComponent<BoxCollider2D>());
@@ -62,6 +62,8 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Rigidbody2D targetRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+
         //See if the arrow has collided with a wall or non-destroyable object
         //If so, activate ArrowDecay() and keep the arrow "embeded" into the wall/object, but keep the origional sprite
         if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "WallTop")
@@ -77,8 +79,9 @@ public class Arrow : MonoBehaviour
 
         //See if arrow has hit an enemy
         //If so, damaged the enemy and then delete gameObject
-        if (collision.gameObject.tag == "Enemy")// && targetRigidbody != null)
+        if (collision.gameObject.tag == "Enemy")
         {
+            EnemyManager EM = targetRigidbody.GetComponent<EnemyManager>();
             EM.TakeDamage(arrowDamage, transform.position, firedFrom);
             Destroy(gameObject);
         }

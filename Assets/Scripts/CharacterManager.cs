@@ -7,7 +7,6 @@ public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
 
-    EnemyMovement EM;
     CharacterMovement CM;
 
     public ParticleSystem bleed;
@@ -44,7 +43,6 @@ public class CharacterManager : MonoBehaviour
 
     void Start()
     {
-        EM = EnemyMovement.instance;
         CM = CharacterMovement.instance;
     }
 
@@ -63,8 +61,11 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Rigidbody2D enemyRigidbody)
     {
+        //Shows what enemy hit the player
+        EnemyMovement EM = enemyRigidbody.GetComponent<EnemyMovement>();
+
         //If the player in invincible, don't deal dmg
         if (isInvincible)
             return;
@@ -76,8 +77,9 @@ public class CharacterManager : MonoBehaviour
         //reduces current health by the amount of damage taken
         currentHealth -= amount;
 
-        //Knocks the player back a distance
-        KnockBack();
+        //Knocks the player back a distance, provided an enemy hits them
+        if (EM != null)
+            KnockBack(EM);
 
         isInvincible = true;
         //Changes the UI elements appropriately 
@@ -85,7 +87,6 @@ public class CharacterManager : MonoBehaviour
         
         //Changes the bleed rate of player and emmits a hit particle effect
         BleedAmount();
-        playerHitEffect.Play();
 
         //play hit sound
         playerHurt.Play();
@@ -122,8 +123,8 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public void KnockBack()
-    {
+    public void KnockBack(EnemyMovement EM)
+    {   
         Vector2 knockbackDirection = CM.playerPosition - EM.enemyPos;
         knockbackDirection.Normalize();
         rigidbody.velocity = Vector2.zero;

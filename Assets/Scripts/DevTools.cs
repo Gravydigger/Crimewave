@@ -5,7 +5,7 @@ using UnityEngine;
 public class DevTools : MonoBehaviour
 {
     CharacterManager CM;
-    EnemyManager EM;
+    //EnemyManager EM;
     WeaponController WC;
     InputController IC;
     DialogueTrigger DT;
@@ -15,7 +15,7 @@ public class DevTools : MonoBehaviour
     private void Start()
     {
         CM = CharacterManager.instance;
-        EM = EnemyManager.instance;
+        //EM = EnemyManager.instance;
         WC = WeaponController.instance;
         IC = InputController.instance;
         DT = DialogueTrigger.instance;
@@ -42,7 +42,7 @@ public class DevTools : MonoBehaviour
     [ContextMenu("Player: Take 1 HP")]
     private void Hit()
     {
-        CM.TakeDamage(1);
+        CM.TakeDamage(1, null);
         Debug.Log("Player: Take 1 HP");
     }
 
@@ -57,7 +57,7 @@ public class DevTools : MonoBehaviour
     private void Slay()
     {
         CM.currentHealth = 1;
-        CM.TakeDamage(1);
+        CM.TakeDamage(1, null);
         Debug.Log("Player: Slay Player");
     }
 

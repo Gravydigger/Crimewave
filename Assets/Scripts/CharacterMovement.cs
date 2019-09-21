@@ -7,7 +7,6 @@ public class CharacterMovement : MonoBehaviour
     public static CharacterMovement instance;
 
     InputController IC;
-    //CharacterManager CM;
     public Animator animator;
 
     public Vector3 playerPosition;
@@ -23,7 +22,6 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         IC = InputController.instance;
-        //CM = CharacterManager.instance;
     }
 
     private void Update()
