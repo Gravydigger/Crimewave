@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    //Allows other Scrips to call the Input Controller
-    //place this line into function Start(): IC = InputController.instance;
     public static InputController instance;
-
     
     //Allows for the keybinds to be changed in-game (WIP)
     public KeyCode leftKey = KeyCode.A;
@@ -18,7 +15,7 @@ public class InputController : MonoBehaviour
     public bool moveLeft, moveRight, moveUp, moveDown, skip;
     public bool mouseFire;
 
-    public float mouseXCoord, mouseYCoord;
+    [HideInInspector] public float mouseXCoord, mouseYCoord;
 
     void Awake()
     {
@@ -40,12 +37,10 @@ public class InputController : MonoBehaviour
 
         /*~~~~~~~~~~~~~~~~~Dialouge~~~~~~~~~~~~~~~~~*/
         skip = Input.GetKey(spaceBar);
+
+
         //use this to allow the player to change the keybinds (WIP)
         //string s  = Input.inputString;
-
-        /********************Enemy Controls******************/
-        /*~~~~~~~~~~~~~~~~~Player Detection~~~~~~~~~~~~~~~~~*/
-
     }
 
 }

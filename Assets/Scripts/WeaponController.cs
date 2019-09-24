@@ -40,7 +40,7 @@ public class WeaponController : MonoBehaviour
         BowMovement();
         Fire();
 
-        if (CM.isDead == true)
+        if (CM.isPlayerDead == true)
             gameObject.SetActive(false);
     }
 

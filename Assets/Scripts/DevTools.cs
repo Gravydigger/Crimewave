@@ -31,7 +31,7 @@ public class DevTools : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Y))
                 Heal();
             if (Input.GetKeyDown(KeyCode.U))
-                Slay();
+                KillPlayer();
             if (Input.GetKeyDown(KeyCode.H))
                 TriggerDialouge();
             if (Input.GetKeyDown(KeyCode.J))
@@ -54,10 +54,9 @@ public class DevTools : MonoBehaviour
     }
 
     [ContextMenu("Player: Slay Player")]
-    private void Slay()
+    private void KillPlayer()
     {
-        CM.currentHealth = 1;
-        CM.TakeDamage(1, null);
+        CM.OnDeath();
         Debug.Log("Player: Slay Player");
     }
 

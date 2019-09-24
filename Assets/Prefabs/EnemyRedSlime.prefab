@@ -4841,7 +4841,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 35a7d9993ec555d4b8bcc98c303f4fe2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5052,7 +5052,7 @@ MonoBehaviour:
   currentHealth: 0
   damageAmount: 1
   knockbackDistance: 3
-  rigidbody: {fileID: 5038302650526369068}
+  gotHitFrom: {x: 0, y: 0}
   detectPlayer: 0
   isDead: 0
 --- !u!114 &286035548499133419
@@ -5068,9 +5068,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  flip: {fileID: 286035548499133416}
   enemyPos: {x: 0, y: 0, z: 0}
   target: {x: 0, y: 0}
+  direction: 0
 --- !u!1 &1413220988414126556
 GameObject:
   m_ObjectHideFlags: 0

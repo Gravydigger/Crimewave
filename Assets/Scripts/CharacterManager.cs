@@ -17,7 +17,7 @@ public class CharacterManager : MonoBehaviour
 
     [HideInInspector] public int maxHealth = 6;
     public int currentHealth = 6;
-    [HideInInspector] public bool isDead = false;
+    [HideInInspector] public bool isPlayerDead = false;
 
     public float invincibilityDuration = 1f;
     public float invincibilityDelay = 0f;
@@ -63,12 +63,12 @@ public class CharacterManager : MonoBehaviour
 
     public void TakeDamage(int amount, Rigidbody2D enemyRigidbody)
     {
-        //Shows what enemy hit the player
-        EnemyMovement EM = enemyRigidbody.GetComponent<EnemyMovement>();
-
         //If the player in invincible, don't deal dmg
         if (isInvincible)
             return;
+
+        //Shows what enemy hit the player
+        EnemyMovement EM = enemyRigidbody.GetComponent<EnemyMovement>();
 
         //Makes sure the player is not overhealed
         if (currentHealth > maxHealth)
@@ -79,7 +79,9 @@ public class CharacterManager : MonoBehaviour
 
         //Knocks the player back a distance, provided an enemy hits them
         if (EM != null)
+        {
             KnockBack(EM);
+        }   
 
         isInvincible = true;
         //Changes the UI elements appropriately 
@@ -88,7 +90,7 @@ public class CharacterManager : MonoBehaviour
         //Changes the bleed rate of player and emmits a hit particle effect
         BleedAmount();
 
-        if (currentHealth > 0 && !isDead)
+        if (currentHealth > 0 && !isPlayerDead)
         {
             ParticleSystem HitInstance = Instantiate(playerHitEffect, transform.position, transform.rotation) as ParticleSystem;
             HitInstance.Play();
@@ -99,7 +101,7 @@ public class CharacterManager : MonoBehaviour
         playerHurt.Play();
 
         //If player has 0 or negitive hp, call OnDeath()
-        if (currentHealth <= 0 && !isDead)
+        if (currentHealth <= 0 && !isPlayerDead)
         {
             OnDeath();
         }
@@ -138,11 +140,15 @@ public class CharacterManager : MonoBehaviour
         rigidbody.AddForce(knockbackDirection * knockbackDistance, ForceMode2D.Impulse);
     }
 
-    private void OnDeath()
+    public void OnDeath()
     {
         //Tells game player is dead, and makes sure he can't revive
-        isDead = true;
+        isPlayerDead = true;
         maxHealth = 0;
+        currentHealth = 0;
+
+        //Change the UI elements appropriately
+        SetHealthUI();
 
         Debug.Log("Player is dead!");
 
