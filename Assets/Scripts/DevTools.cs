@@ -26,16 +26,19 @@ public class DevTools : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            if (Input.GetKeyDown(KeyCode.T))
-                Hit();
-            if (Input.GetKeyDown(KeyCode.Y))
-                Heal();
-            if (Input.GetKeyDown(KeyCode.U))
-                KillPlayer();
-            if (Input.GetKeyDown(KeyCode.H))
-                TriggerDialouge();
             if (Input.GetKeyDown(KeyCode.J))
-                NextSentence();
+                Hit();
+            if (Input.GetKeyDown(KeyCode.H))
+                Heal();
+            if (Input.GetKeyDown(KeyCode.P))
+                KillPlayer();
+            //if (Input.GetKeyDown(KeyCode.L))
+                //KillAllEnemies();
+
+            //if (Input.GetKeyDown(KeyCode.H))
+            //TriggerDialouge();
+            //if (Input.GetKeyDown(KeyCode.J))
+            //NextSentence();
         }
     }
 
@@ -58,6 +61,15 @@ public class DevTools : MonoBehaviour
     {
         CM.OnDeath();
         Debug.Log("Player: Slay Player");
+    }
+
+    private void KillAllEnemies()
+    {
+        EnemyManager[] enemies = FindObjectsOfType<EnemyManager>();
+        foreach (EnemyManager enemy in enemies)
+        {
+            
+        }
     }
 
     private void TriggerDialouge()

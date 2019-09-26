@@ -6,6 +6,7 @@ public class CharacterMovement : MonoBehaviour
 {
     public static CharacterMovement instance;
 
+    GameManager GM;
     InputController IC;
     public Animator animator;
 
@@ -22,6 +23,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         IC = InputController.instance;
+        GM = GameManager.instance;
     }
 
     private void Update()
@@ -31,13 +33,20 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        if (!GM.gameOver)
+        {
         //Moves the character in cardinal directions
         MoveCharacter();
         //Flips the player sprite depending if the player is stationary
         FlipCharacter();
         //controls the animator to spawn between standing and running
         Animator();
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
+        }
+
     }
 
     private void MoveCharacter()

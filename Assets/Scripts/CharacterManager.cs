@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
+    public static UnityEvent onPlayerDeath = new UnityEvent();
 
     CharacterMovement CM;
 
@@ -102,9 +104,7 @@ public class CharacterManager : MonoBehaviour
 
         //If player has 0 or negitive hp, call OnDeath()
         if (currentHealth <= 0 && !isPlayerDead)
-        {
             OnDeath();
-        }
     }
 
     public void HealHealth(int amount)
@@ -132,6 +132,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    //Knocks back the player in the oppostie direction that they were hit
     public void KnockBack(EnemyMovement EM)
     {   
         Vector2 knockbackDirection = CM.playerPosition - EM.enemyPos;
@@ -150,11 +151,14 @@ public class CharacterManager : MonoBehaviour
         //Change the UI elements appropriately
         SetHealthUI();
 
+        //Fire off an event saying that the Player has died
+        onPlayerDeath.Invoke();
+
         Debug.Log("Player is dead!");
 
         ParticleSystem PlayerExplodeInstance = Instantiate(explode, transform.position, Quaternion.identity) as ParticleSystem;
 
-        //disables the player gameObject
+        //Disables the player gameObject
         gameObject.SetActive(false);
     }
 
@@ -193,7 +197,5 @@ public class CharacterManager : MonoBehaviour
         {
             bleed.Stop();
         }
-
-        //Debug.Log("Bleed Rate: " + Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f);
     }
 }

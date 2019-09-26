@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyManager : MonoBehaviour
 {
     [HideInInspector] public EnemyManager instance;
     //CharacterManager CM;
     EnemyMovement EM;
+
+    public static UnityEvent onAnyEnemyDeath = new UnityEvent();
 
     public ParticleSystem enemyHitEffect;
     public ParticleSystem explode;
@@ -95,11 +98,10 @@ public class EnemyManager : MonoBehaviour
 
         //If enemy has 0 or negitive hp, call OnDeath()
         if (currentHealth <= 0 && !isDead)
-        {
             OnDeath();
-        }
     }
 
+    //Knocks back the enemy in the oppostie direction that they were hit
     public void KnockBack(Vector3 arrowPos)
     {
         Vector2 knockbackDirection = EM.enemyPos - arrowPos;
@@ -121,6 +123,9 @@ public class EnemyManager : MonoBehaviour
         //Tells game the enemy is dead, and makes sure it can't revive
         isDead = true;
         maxHealth = 0;
+
+        //Fire off an event saying that an enemy has died
+        onAnyEnemyDeath.Invoke();
 
         Debug.Log(gameObject.name + " has died.");
 

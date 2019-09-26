@@ -10,6 +10,7 @@ public class WeaponController : MonoBehaviour
     public Rigidbody2D arrow;
     InputController IC;
     CharacterManager CM;
+    GameManager GM;
 
     [SerializeField] Sprite[] bowSprites;
 
@@ -33,12 +34,16 @@ public class WeaponController : MonoBehaviour
     {
         IC = InputController.instance;
         CM = CharacterManager.instance;
+        GM = GameManager.instance;
     }
 
     void Update()
     {
-        BowMovement();
-        Fire();
+        if (!GM.gameOver && !GM.isGamePaused)
+        {
+            BowMovement();
+            Fire();
+        }
 
         if (CM.isPlayerDead == true)
             gameObject.SetActive(false);
