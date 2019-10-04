@@ -4,16 +4,33 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    [SerializeField] Transform player;
     private Vector3 offest;
+    private Vector3 zOffset = new Vector3(0, 0, -1);
+    InputController IC;
+    public Vector2 mousePos;
+    public Vector2 playerPos;
+    private float maxScreenPoint = 0.8f;
+    private Vector2 velocity = Vector2.zero;
+
+    private void Awake()
+    {
+        offest = transform.position - player.transform.position;
+        transform.position = zOffset;
+        
+    }
 
     void Start()
     {
-        offest = transform.position - player.transform.position;
+        IC = InputController.instance;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        transform.position = player.transform.position + offest;
+        playerPos = player.transform.position;
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = (playerPos + mousePos) / 2f;
+        transform.position += zOffset;
+        //transform.position = playerPos + offest;
     }
 }

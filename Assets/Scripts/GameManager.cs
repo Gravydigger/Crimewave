@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseMenu();
         }
@@ -91,6 +91,5 @@ public class GameManager : MonoBehaviour
             gamePaused.SetActive(false);
             return;
         }
-
     }
 }
