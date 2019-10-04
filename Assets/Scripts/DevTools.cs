@@ -5,17 +5,14 @@ using UnityEngine;
 public class DevTools : MonoBehaviour
 {
     CharacterManager CM;
-    //EnemyManager EM;
     WeaponController WC;
     InputController IC;
     DialogueTrigger DT;
     DialogueManager DM;
 
-    // Start is called before the first frame update
     private void Start()
     {
         CM = CharacterManager.instance;
-        //EM = EnemyManager.instance;
         WC = WeaponController.instance;
         IC = InputController.instance;
         DT = DialogueTrigger.instance;
@@ -34,7 +31,6 @@ public class DevTools : MonoBehaviour
                 KillPlayer();
             if (Input.GetKeyDown(KeyCode.L))
                 KillAllEnemies();
-
             //if (Input.GetKeyDown(KeyCode.H))
             //TriggerDialouge();
             //if (Input.GetKeyDown(KeyCode.J))

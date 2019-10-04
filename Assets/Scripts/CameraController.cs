@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
         IC = InputController.instance;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         mousePos = CaptureMousePos();
         playerPos = UpdatePlayerPos();
