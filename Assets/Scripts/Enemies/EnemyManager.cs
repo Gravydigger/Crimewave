@@ -102,7 +102,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     //Knocks back the enemy in the oppostie direction that they were hit
-    public void KnockBack(Vector3 arrowPos)
+    private void KnockBack(Vector3 arrowPos)
     {
         Vector2 knockbackDirection = EM.enemyPos - arrowPos;
         knockbackDirection.Normalize();
@@ -118,7 +118,7 @@ public class EnemyManager : MonoBehaviour
             currentHealth = maxHealth;
     }
 
-    private void OnDeath()
+    public void OnDeath()
     {
         //Tells game the enemy is dead, and makes sure it can't revive
         isDead = true;

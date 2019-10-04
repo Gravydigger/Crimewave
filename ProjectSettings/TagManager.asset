@@ -50,6 +50,9 @@ TagManager:
   - name: Cliffs
     uniqueID: 1449235343
     locked: 0
+  - name: Forest
+    uniqueID: 217691697
+    locked: 0
   - name: CrossHair
     uniqueID: 2786457323
     locked: 0

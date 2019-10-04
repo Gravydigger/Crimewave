@@ -30,10 +30,10 @@ public class DevTools : MonoBehaviour
                 Hit();
             if (Input.GetKeyDown(KeyCode.H))
                 Heal();
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.K))
                 KillPlayer();
-            //if (Input.GetKeyDown(KeyCode.L))
-                //KillAllEnemies();
+            if (Input.GetKeyDown(KeyCode.L))
+                KillAllEnemies();
 
             //if (Input.GetKeyDown(KeyCode.H))
             //TriggerDialouge();
@@ -63,12 +63,13 @@ public class DevTools : MonoBehaviour
         Debug.Log("Player: Slay Player");
     }
 
+    [ContextMenu("Enemies: Kill All Enemies")]
     private void KillAllEnemies()
     {
         EnemyManager[] enemies = FindObjectsOfType<EnemyManager>();
         foreach (EnemyManager enemy in enemies)
         {
-            
+            enemy.OnDeath();
         }
     }
 

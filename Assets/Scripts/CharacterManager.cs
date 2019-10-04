@@ -121,7 +121,7 @@ public class CharacterManager : MonoBehaviour
         BleedAmount();
     }
 
-    public void Invincibility()
+    private void Invincibility()
     {
         //shows how long the player is invincible
         invincibilityDelay += Time.deltaTime;
@@ -133,7 +133,7 @@ public class CharacterManager : MonoBehaviour
     }
 
     //Knocks back the player in the oppostie direction that they were hit
-    public void KnockBack(EnemyMovement EM)
+    private void KnockBack(EnemyMovement EM)
     {   
         Vector2 knockbackDirection = CM.playerPosition - EM.enemyPos;
         knockbackDirection.Normalize();

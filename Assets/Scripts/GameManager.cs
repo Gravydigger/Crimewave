@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverLost;
     public GameObject gameOverWon;
     public GameObject gamePaused;
-    public bool gameOver = false;
-    public bool isGamePaused = false;
+    public bool gameOver;
+    public bool isGamePaused;
 
     private void Awake()
     {
@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameOver = false;
+        isGamePaused = false;
+        Time.timeScale = 1f;
         //sets the cursor to a cross hair
         Cursor.SetCursor(crossHair, crossHairOffset, CursorMode.Auto);
         CM = CharacterManager.instance;
