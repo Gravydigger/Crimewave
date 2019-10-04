@@ -5,19 +5,21 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform player;
-    private Vector3 offest;
-    private Vector3 zOffset = new Vector3(0, 0, -1);
     InputController IC;
-    public Vector2 mousePos;
-    public Vector2 playerPos;
-    private float maxScreenPoint = 0.8f;
-    private Vector2 velocity = Vector2.zero;
+
+    Vector3 mousePos, playerPos, refVel;
+
+    float zOffset;
+    //How far away the camara should be when the mouse is at the edge of the screen
+    float cameraDistance = 3.5f;
+    //how quickly the camera will move to its target position
+    float smoothTime = 0.15f;
+
 
     private void Awake()
     {
-        offest = transform.position - player.transform.position;
-        transform.position = zOffset;
-        
+        playerPos = player.position;
+        zOffset = transform.position.z;
     }
 
     void Start()
@@ -27,10 +29,44 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        playerPos = player.transform.position;
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = (playerPos + mousePos) / 2f;
-        transform.position += zOffset;
-        //transform.position = playerPos + offest;
+        mousePos = CaptureMousePos();
+        playerPos = UpdatePlayerPos();
+        UpdateCameraPos();
+    }
+
+    Vector3 CaptureMousePos()
+    {
+        //find the mouse position on the screen
+        Vector2 tempMousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+        //sets the camera's offset to the centre of the screen
+        tempMousePos *= 2;
+        tempMousePos -= Vector2.one;
+
+        //Makes the distance from the edge of the screen consistant (optional)
+        float max = 0.9f;
+        if (Mathf.Abs(tempMousePos.x) > max || Mathf.Abs(tempMousePos.y) > max)
+        {
+            tempMousePos = tempMousePos.normalized;
+        }
+
+        return tempMousePos;
+    }
+
+    Vector3 UpdatePlayerPos()
+    {
+        Vector3 mouseOffset = mousePos * cameraDistance;
+        Vector3 tempPlayerPos = player.position + mouseOffset;
+
+        //prevents the camera being placed on the player, which would make the player area go out of view
+        tempPlayerPos.z = zOffset;
+
+        return tempPlayerPos;
+    }
+
+    void UpdateCameraPos()
+    {
+        Vector3 cameraPos = Vector3.SmoothDamp(transform.position, playerPos, ref refVel, smoothTime);
+        transform.position = cameraPos;
     }
 }
