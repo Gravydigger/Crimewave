@@ -2009,9 +2009,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -9.990278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &104416215
 MonoBehaviour:
@@ -5358,9 +5358,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -25, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1220734731
 MonoBehaviour:
@@ -6096,9 +6096,9 @@ RectTransform:
   m_Father: {fileID: 121641950}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1329529977
@@ -8344,7 +8344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1832963169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8524,9 +8524,9 @@ RectTransform:
   m_Father: {fileID: 121641950}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1885790993
@@ -8841,7 +8841,7 @@ PrefabInstance:
     - target: {fileID: 1181340379301572131, guid: cd615e8b8be3b024fbde84883a804b99,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1181340379301572313, guid: cd615e8b8be3b024fbde84883a804b99,
         type: 3}
@@ -9070,6 +9070,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFastSlime
       objectReference: {fileID: 0}
+    - target: {fileID: 911493182620397074, guid: 8395d23ac85eef144b001e5e50566895,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 911493182620397288, guid: 8395d23ac85eef144b001e5e50566895,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9142,7 +9147,7 @@ PrefabInstance:
     - target: {fileID: 286035548499133203, guid: b26c44c576f54d5429b209a4df281cca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 286035548499133417, guid: b26c44c576f54d5429b209a4df281cca,
         type: 3}
