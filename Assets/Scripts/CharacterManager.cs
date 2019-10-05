@@ -12,10 +12,11 @@ public class CharacterManager : MonoBehaviour
     CharacterMovement CM;
 
     public ParticleSystem bleed;
-    public ParticleSystem playerHitEffect;
-    public ParticleSystem explode;
+    public ParticleSystem playerHitParticle;
+    public ParticleSystem playerDeathParticle;
 
-    public AudioSource playerHurt;
+    public AudioSource playerHurtSound;
+    public AudioSource playerDeathSound;
 
     [HideInInspector] public int maxHealth = 6;
     public int currentHealth = 6;
@@ -92,15 +93,17 @@ public class CharacterManager : MonoBehaviour
         //Changes the bleed rate of player and emmits a hit particle effect
         BleedAmount();
 
+        //If the player is not dead
         if (currentHealth > 0 && !isPlayerDead)
         {
-            ParticleSystem HitInstance = Instantiate(playerHitEffect, transform.position, transform.rotation) as ParticleSystem;
-            HitInstance.Play();
-            Destroy(HitInstance.gameObject, HitInstance.main.duration + 0.1f);
-        }
+            //Spawn hit particle FX
+            ParticleSystem HurtInstance = Instantiate(playerHitParticle, transform.position, transform.rotation) as ParticleSystem;
+            HurtInstance.Play();
+            Destroy(HurtInstance.gameObject, HurtInstance.main.duration + 0.1f);
 
-        //play hit sound
-        playerHurt.Play();
+            //Play hit SFX
+            playerHurtSound.Play();
+        }
 
         //If player has 0 or negitive hp, call OnDeath()
         if (currentHealth <= 0 && !isPlayerDead)
@@ -156,7 +159,11 @@ public class CharacterManager : MonoBehaviour
 
         Debug.Log("Player is dead!");
 
-        ParticleSystem PlayerExplodeInstance = Instantiate(explode, transform.position, Quaternion.identity) as ParticleSystem;
+        //Unparents the death particle effect, plays the particle effect & audio, then destroys it once it has finished
+        playerDeathParticle.transform.parent = null;
+        playerDeathParticle.Play();
+        playerDeathSound.Play();
+        Destroy(playerDeathParticle.gameObject, playerDeathParticle.main.duration + 0.1f);
 
         //Disables the player gameObject
         gameObject.SetActive(false);
@@ -166,19 +173,19 @@ public class CharacterManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            // make a empty heart by default
+            //Make a empty heart by default
             int index = 2;
-            // make a full heart if health >= 6, 4  or 2 respectively
+            //Make a full heart if health >= 6, 4  or 2 respectively
             if (currentHealth >= (6 - i * 2))
             {
                 index = 0;
             }
-            // make a half heart if health == 5, 3  or 1 respectively
+            //Make a half heart if health == 5, 3  or 1 respectively
             if (currentHealth == (5 - i * 2))
             {
                 index = 1;
             }
-            // set the correct sprite
+            //Set the correct sprite
             hearts[i].sprite = healthSprites[index];
         }
     }
@@ -186,13 +193,13 @@ public class CharacterManager : MonoBehaviour
     private void BleedAmount()
     {
         var bleedRate = bleed.emission;
-        //if player is at 0hp and is not at full health, make them bleed
+        //If player is at 0hp and is not at full health, make them bleed
         if (currentHealth != 0)
         {
             bleedRate.rateOverTime = Mathf.Abs(currentHealth - (maxHealth + 1)) / 2 * 1.5f;
         }
 
-        //if player is at 0hp, stop the particle system.
+        //If player is at 0hp, stop the particle system.
         else
         {
             bleed.Stop();

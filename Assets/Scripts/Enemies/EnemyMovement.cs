@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
     private new Rigidbody2D rigidbody;
 
     private Vector2 oldPos;
-    public int direction = 0;
+    private int direction = 0;
 
     private void Awake()
     {

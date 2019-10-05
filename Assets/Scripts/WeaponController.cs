@@ -12,6 +12,9 @@ public class WeaponController : MonoBehaviour
     CharacterManager CM;
     GameManager GM;
 
+    public AudioSource bowDrawn;
+    public AudioSource bowFire;
+
     [SerializeField] Sprite[] bowSprites;
 
     float leftOffset;
@@ -90,6 +93,9 @@ public class WeaponController : MonoBehaviour
         //allows the bow to be shot
         if (Input.GetButton("Fire1") == true)
         {
+            if (Input.GetButtonDown("Fire1"))
+                bowDrawn.Play();
+
             spriteRenderer.sprite = bowSprites[1];
 
             //Prevents spam firing
@@ -113,6 +119,7 @@ public class WeaponController : MonoBehaviour
                 spriteRenderer.sprite = bowSprites[0];
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 target.z = 0f;
+                bowFire.Play();
                 Rigidbody2D ArrowInstance = Instantiate(arrow, transform.position + transform.right * 0.3f, transform.rotation) as Rigidbody2D;
                 fireDelay = 0;
             }

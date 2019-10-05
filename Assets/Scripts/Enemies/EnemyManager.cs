@@ -11,10 +11,11 @@ public class EnemyManager : MonoBehaviour
 
     public static UnityEvent onAnyEnemyDeath = new UnityEvent();
 
-    public ParticleSystem enemyHitEffect;
-    public ParticleSystem explode;
+    public ParticleSystem enemyHurtParticle;
+    public ParticleSystem enemyDeathParticle;
 
-    public AudioSource enemyHurt;
+    public AudioSource enemyHurtSound;
+    public AudioSource enemyDeathSound;
 
     public float enemySpeed = 6f;
     public int maxHealth = 2;
@@ -79,22 +80,23 @@ public class EnemyManager : MonoBehaviour
         //reduces current health by the amount of damage taken
         currentHealth -= amount;
 
+        //If the enemy is not dead...
+        if (currentHealth > 0 && !isDead)
+        {
+            //Spawn hit particle FX 
+            ParticleSystem HitInstance = Instantiate(enemyHurtParticle, transform.position, transform.rotation) as ParticleSystem;
+            HitInstance.Play();
+            Destroy(HitInstance.gameObject, HitInstance.main.duration + 0.1f);
+
+            //Play a hit SFX
+            enemyHurtSound.Play();
+        }
+
         //Knocks back the enemy
         KnockBack(arrowPos);
 
         //send where the arrow was fired from to EMV
         gotHitFrom = firedFrom;
-
-        //Emits a hit particle effect if the enemy is not dead
-        if (currentHealth > 0 && !isDead)
-        {
-            ParticleSystem HitInstance = Instantiate(enemyHitEffect, transform.position, transform.rotation) as ParticleSystem;
-            HitInstance.Play();
-            Destroy(HitInstance.gameObject, HitInstance.main.duration + 0.1f);
-        }
-
-        //play hit sound
-        enemyHurt.Play();
 
         //If enemy has 0 or negitive hp, call OnDeath()
         if (currentHealth <= 0 && !isDead)
@@ -129,12 +131,13 @@ public class EnemyManager : MonoBehaviour
 
         Debug.Log(gameObject.name + " has died.");
 
-        //unparents the explode particle effect, plays the particle effect, then destroys it once it has finished
-        explode.transform.parent = null;
-        explode.Play();
-        Destroy(explode.gameObject, explode.main.duration + 0.1f);
+        //Unparents the death particle effect, plays the particle effect & audio, then destroys it once it has finished
+        enemyDeathParticle.transform.parent = null;
+        enemyDeathParticle.Play();
+        enemyDeathSound.Play();
+        Destroy(enemyDeathParticle.gameObject, enemyDeathParticle.main.duration + 0.1f);
 
-        //destroys the enemy gameObject
+        //Destroys the enemy gameObject
         Destroy(gameObject);
     }
 }
