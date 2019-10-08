@@ -6,8 +6,9 @@ using UnityEngine.Events;
 public class EnemyManager : MonoBehaviour
 {
     [HideInInspector] public EnemyManager instance;
-    //CharacterManager CM;
     EnemyMovement EM;
+    Renderer enemy;
+    CharacterMovement CM;
 
     public static UnityEvent onAnyEnemyDeath = new UnityEvent();
 
@@ -21,12 +22,15 @@ public class EnemyManager : MonoBehaviour
     public int maxHealth = 2;
     public int currentHealth = 1;
     public int damageAmount = 1;
+    public float findPlayerOvershoot = 5f;
     public float knockbackDistance = 3f;
     private new Rigidbody2D rigidbody;
 
     [HideInInspector] public Vector2 gotHitFrom;
+    [HideInInspector] public Vector2 playerLastSeen;
 
-    public bool detectPlayer = false;
+    public float detectPlayer = -1f;
+    public float wakeUpTime = 2f;
     [HideInInspector] public bool isDead = false;
 
     private void Awake()
@@ -35,33 +39,39 @@ public class EnemyManager : MonoBehaviour
         currentHealth = maxHealth;
         rigidbody = GetComponent<Rigidbody2D>();
         EM = GetComponent<EnemyMovement>();
+        enemy = GetComponent<SpriteRenderer>();
     }
 
-    void Start()
+    private void Start()
     {
-        //CM = CharacterManager.instance;
+        CM = CharacterMovement.instance;
     }
 
-    //If player enters its visual arc, chase player
-    private void OnTriggerEnter2D(Collider2D collision)
+    //If player sees the enemy, chase the player
+    private void OnBecameVisible()
     {
-        if (collision.gameObject.tag == "Player")
+        if (detectPlayer < 0)
         {
-            detectPlayer = true;
-            //Debug.Log("Player Detected.");
+            detectPlayer = 0;
         }
     }
-    
-    //if player exits its visual arc, move to where it last saw the player
+
+    private void OnBecameInvisible()
+    {
+        playerLastSeen = CM.playerPosition;
+        //detectPlayer = -1f;
+    }
+
+    /*/if player exits its visual arc, move to where it last saw the player
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            detectPlayer = false;
-            //Debug.Log("Player Lost.");
+            playerLastSeen = CM.playerPosition;
+            detectPlayer = -1f;
         }
     }
-
+    */
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")

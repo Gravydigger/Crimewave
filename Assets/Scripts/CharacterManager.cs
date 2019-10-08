@@ -148,6 +148,7 @@ public class CharacterManager : MonoBehaviour
     {
         //Tells game player is dead, and makes sure he can't revive
         isPlayerDead = true;
+        isInvincible = false;
         maxHealth = 0;
         currentHealth = 0;
 

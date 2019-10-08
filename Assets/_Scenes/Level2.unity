@@ -10524,6 +10524,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197319803}
   m_CullTransparentMesh: 0
+--- !u!212 &209854770 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1181340379301572312, guid: cd615e8b8be3b024fbde84883a804b99,
+    type: 3}
+  m_PrefabInstance: {fileID: 1181340379290399324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &279331582
 GameObject:
   m_ObjectHideFlags: 0
@@ -24062,7 +24068,7 @@ PrefabInstance:
     - target: {fileID: 1181340379301572313, guid: cd615e8b8be3b024fbde84883a804b99,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.07
+      value: 6.71
       objectReference: {fileID: 0}
     - target: {fileID: 1181340379301572313, guid: cd615e8b8be3b024fbde84883a804b99,
         type: 3}
@@ -24109,6 +24115,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1181340379301572317, guid: cd615e8b8be3b024fbde84883a804b99,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 209854770}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd615e8b8be3b024fbde84883a804b99, type: 3}
 --- !u!1001 &6637614119208827823

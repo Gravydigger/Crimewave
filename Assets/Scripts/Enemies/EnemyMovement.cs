@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
 
     EnemyManager EM;
     CharacterMovement CM;
+    Renderer enemy;
 
     SpriteRenderer flip;
     Animator animator;
@@ -15,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public Vector2 target;
     private new Rigidbody2D rigidbody;
 
-    private Vector2 oldPos;
+    private Vector3 oldPos;
     private int direction = 0;
 
     private void Awake()
@@ -26,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         instance = this;
         oldPos = transform.position;
+        enemy = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -35,13 +37,49 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        //EM = GetComponent<EnemyManager>();
+        enemyPos = transform.position;
+
+        DetectPlayer();
+
+        FlipEnemy();
+
+        MovingDirection();
+
+        IsMoving();
+    }
+
+    void DetectPlayer()
+    {
+        
+        if (EM.detectPlayer >= 0 && EM.detectPlayer <= EM.wakeUpTime)
+            EM.detectPlayer += Time.deltaTime;
+
         //Moves the enemy in cardinal directions if it sees the player
-        if (EM.detectPlayer)
+        if (EM.detectPlayer >= EM.wakeUpTime)
         {
-            target = CM.playerPosition;
+            if (enemy.isVisible)
+            {
+                target = CM.playerPosition;
+            }
             MoveEnemy(target);
+            EM.playerLastSeen = Vector2.zero;
             EM.gotHitFrom = Vector2.zero;
+        }
+
+        //Moves to where it last saw the player
+        else if (EM.playerLastSeen != Vector2.zero)
+        {
+            //go to where the player was lasts seen, and overshoot a certain distance
+            target = EM.playerLastSeen;
+            float magnitude = target.magnitude;
+            target.Normalize();
+            target *= magnitude + EM.findPlayerOvershoot;
+
+            MoveEnemy(target);
+            if (Vector2.Distance(transform.position, target) < 0.01f)
+            {
+                EM.gotHitFrom = Vector2.zero;
+            }
         }
 
         //Moves to where it was shot from if It cannot see the player currently
@@ -54,19 +92,11 @@ public class EnemyMovement : MonoBehaviour
                 EM.gotHitFrom = Vector2.zero;
             }
         }
-
-        enemyPos = transform.position;
-
-        //Flips the enemy sprite depending if the enemy is stationary
-        FlipEnemy();
-
-        isMoving();
     }
 
-    private void isMoving()
+    private void MovingDirection()
     {
-        //EM = GetComponent<EnemyManager>();
-        if (EM.detectPlayer)
+        if (EM.detectPlayer > 2f)
         {
             //if moving left, give a negitive direction
             if (CM.playerPosition.x > transform.position.x)
@@ -84,16 +114,26 @@ public class EnemyMovement : MonoBehaviour
         else
             direction = 0;
 
-        oldPos = transform.position;
     }
 
-    //Makes the enemy move towards a target (will be replaced with pathfinding code)
+    bool IsMoving()
+    {
+        if (transform.position == oldPos)
+        {
+            return false;
+        }
+
+        oldPos = transform.position;
+        return true;
+    }
+
+    //Makes the enemy move towards a target (will be replaced with pathfinding code eventually)
     private void MoveEnemy(Vector2 target)
     {
         transform.position = Vector2.MoveTowards(transform.position, target, EM.enemySpeed * Time.deltaTime);
-        //rigidbody.MovePosition(target + transform.position * Time.fixedDeltaTime);
     }
 
+    //Flips the enemy sprite depending if the enemy is stationary
     private void FlipEnemy()
     {
         if (direction < 0)
