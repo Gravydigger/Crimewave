@@ -9737,7 +9737,7 @@ GameObject:
   - component: {fileID: 1181340379301572318}
   - component: {fileID: 1181340379301572316}
   - component: {fileID: 1181340379301572319}
-  - component: {fileID: 7890852712623475313}
+  - component: {fileID: 2476300833099170840}
   - component: {fileID: 1181340379301572317}
   - component: {fileID: 1181340379301572315}
   m_Layer: 0
@@ -9877,8 +9877,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.88, y: 0.56}
   m_EdgeRadius: 0
---- !u!61 &7890852712623475313
-BoxCollider2D:
+--- !u!58 &2476300833099170840
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9890,19 +9890,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.4375}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0.0625}
   serializedVersion: 2
-  m_Size: {x: 7, y: 7}
-  m_EdgeRadius: 0
+  m_Radius: 7
 --- !u!114 &1181340379301572317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9924,11 +9914,13 @@ MonoBehaviour:
   maxHealth: 2
   currentHealth: 0
   damageAmount: 1
+  alertRadius: 5
+  findPlayerOvershoot: 5
   knockbackDistance: 3
   gotHitFrom: {x: 0, y: 0}
   playerLastSeen: {x: 0, y: 0}
   detectPlayer: 0
-  wakeUpTime: 2
+  gotHit: 0
   isDead: 0
 --- !u!114 &1181340379301572315
 MonoBehaviour:
@@ -9945,3 +9937,4 @@ MonoBehaviour:
   instance: {fileID: 0}
   enemyPos: {x: 0, y: 0, z: 0}
   target: {x: 0, y: 0}
+  estimatedTarget: {x: 0, y: 0}

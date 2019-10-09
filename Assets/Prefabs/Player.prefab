@@ -9751,7 +9751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bleed: {fileID: 6637614119422795758}
-  playerHitParticle: {fileID: 0}
+  playerHitParticle: {fileID: 6637614119584891130}
   playerDeathParticle: {fileID: 1737834204631476377}
   playerHurtSound: {fileID: 1545460963681133789}
   playerDeathSound: {fileID: 9036889922241058133}

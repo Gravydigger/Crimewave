@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
     public int maxHealth = 2;
     public int currentHealth = 1;
     public int damageAmount = 1;
+    public float alertRadius = 5f;
     public float findPlayerOvershoot = 5f;
     public float knockbackDistance = 3f;
     private new Rigidbody2D rigidbody;
@@ -29,8 +30,8 @@ public class EnemyManager : MonoBehaviour
     [HideInInspector] public Vector2 gotHitFrom;
     [HideInInspector] public Vector2 playerLastSeen;
 
-    public float detectPlayer = -1f;
-    public float wakeUpTime = 2f;
+    public bool detectPlayer = false;
+    public bool gotHit = false;
     [HideInInspector] public bool isDead = false;
 
     private void Awake()
@@ -47,31 +48,26 @@ public class EnemyManager : MonoBehaviour
         CM = CharacterMovement.instance;
     }
 
-    //If player sees the enemy, chase the player
-    private void OnBecameVisible()
+    //If player enters its visual arc, chase the player
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (detectPlayer < 0)
+        if (collision.gameObject.tag == "Player")
         {
-            detectPlayer = 0;
+            detectPlayer = true;
         }
     }
 
-    private void OnBecameInvisible()
-    {
-        playerLastSeen = CM.playerPosition;
-        //detectPlayer = -1f;
-    }
-
-    /*/if player exits its visual arc, move to where it last saw the player
+    //if player exits its visual arc, move to where it last saw the player
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             playerLastSeen = CM.playerPosition;
-            detectPlayer = -1f;
+            detectPlayer = false;
         }
     }
-    */
+    
+    //Deal damage to the player
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -107,6 +103,7 @@ public class EnemyManager : MonoBehaviour
 
         //send where the arrow was fired from to EMV
         gotHitFrom = firedFrom;
+        gotHit = true;
 
         //If enemy has 0 or negitive hp, call OnDeath()
         if (currentHealth <= 0 && !isDead)

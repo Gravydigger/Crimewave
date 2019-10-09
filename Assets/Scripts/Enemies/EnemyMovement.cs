@@ -14,9 +14,9 @@ public class EnemyMovement : MonoBehaviour
     Animator animator;
     [HideInInspector] public Vector3 enemyPos;
     [HideInInspector] public Vector2 target;
+    public Vector2 estimatedTarget;
     private new Rigidbody2D rigidbody;
 
-    private Vector3 oldPos;
     private int direction = 0;
 
     private void Awake()
@@ -26,7 +26,6 @@ public class EnemyMovement : MonoBehaviour
         flip = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
         instance = this;
-        oldPos = transform.position;
         enemy = GetComponent<SpriteRenderer>();
     }
 
@@ -44,26 +43,33 @@ public class EnemyMovement : MonoBehaviour
         FlipEnemy();
 
         MovingDirection();
-
-        IsMoving();
     }
 
     void DetectPlayer()
     {
-        
-        if (EM.detectPlayer >= 0 && EM.detectPlayer <= EM.wakeUpTime)
-            EM.detectPlayer += Time.deltaTime;
-
         //Moves the enemy in cardinal directions if it sees the player
-        if (EM.detectPlayer >= EM.wakeUpTime)
+        if (EM.detectPlayer || estimatedTarget != Vector2.zero)
         {
-            if (enemy.isVisible)
+            if (EM.detectPlayer)
             {
                 target = CM.playerPosition;
+                MoveEnemy(target);
             }
-            MoveEnemy(target);
-            EM.playerLastSeen = Vector2.zero;
-            EM.gotHitFrom = Vector2.zero;
+
+            else
+                MoveEnemy(estimatedTarget);
+            
+            if (EM.playerLastSeen != Vector2.zero || EM.gotHit)
+            {
+                EM.playerLastSeen = Vector2.zero;
+                EM.gotHit = false;
+            }
+
+            if (Vector2.Distance(transform.position, estimatedTarget) < 0.01f)
+            {
+                estimatedTarget = Vector2.zero;
+            }
+
         }
 
         //Moves to where it last saw the player
@@ -71,6 +77,7 @@ public class EnemyMovement : MonoBehaviour
         {
             //go to where the player was lasts seen, and overshoot a certain distance
             target = EM.playerLastSeen;
+            AlertFriends(target);
             float magnitude = target.magnitude;
             target.Normalize();
             target *= magnitude + EM.findPlayerOvershoot;
@@ -78,25 +85,49 @@ public class EnemyMovement : MonoBehaviour
             MoveEnemy(target);
             if (Vector2.Distance(transform.position, target) < 0.01f)
             {
-                EM.gotHitFrom = Vector2.zero;
+                EM.gotHit = false;
+                EM.playerLastSeen = Vector2.zero;
             }
         }
 
-        //Moves to where it was shot from if It cannot see the player currently
-        else if (EM.gotHitFrom != Vector2.zero)
+        //Moves to where it was shot from if it cannot see the player currently
+        else if (EM.gotHit)
         {
             target = EM.gotHitFrom;
+
+            AlertFriends(target);
             MoveEnemy(target);
             if (Vector2.Distance(transform.position, target) < 0.01f)
             {
-                EM.gotHitFrom = Vector2.zero;
+                EM.gotHit = false;
+
             }
         }
     }
 
+    public void AlertFriends(Vector2 target)
+    {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, EM.alertRadius);
+
+        foreach (Collider2D enemyInRange in hitColliders)
+        {
+            
+            EnemyMovement currentEnemy = enemyInRange.GetComponent<EnemyMovement>();
+            if (currentEnemy != null)
+            {
+                //float magnitude = target.magnitude;
+                //target.Normalize();
+                //target *= magnitude + EM.findPlayerOvershoot;
+                //target += Random.insideUnitCircle;
+                currentEnemy.estimatedTarget = target;
+            }
+        }
+    }
+
+
     private void MovingDirection()
     {
-        if (EM.detectPlayer > 2f)
+        if (EM.detectPlayer)
         {
             //if moving left, give a negitive direction
             if (CM.playerPosition.x > transform.position.x)
@@ -114,17 +145,6 @@ public class EnemyMovement : MonoBehaviour
         else
             direction = 0;
 
-    }
-
-    bool IsMoving()
-    {
-        if (transform.position == oldPos)
-        {
-            return false;
-        }
-
-        oldPos = transform.position;
-        return true;
     }
 
     //Makes the enemy move towards a target (will be replaced with pathfinding code eventually)
