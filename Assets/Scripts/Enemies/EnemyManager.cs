@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
     public int currentHealth = 1;
     public int damageAmount = 1;
     public float alertRadius = 5f;
-    public float findPlayerOvershoot = 5f;
+    public float findPlayerDedication = 5f;
     public float knockbackDistance = 3f;
     private new Rigidbody2D rigidbody;
 
@@ -135,8 +135,10 @@ public class EnemyManager : MonoBehaviour
 
         //Fire off an event saying that an enemy has died
         onAnyEnemyDeath.Invoke();
-
         Debug.Log(gameObject.name + " has died.");
+
+        //makes of the friends chase the player
+        EM.AlertFriends(gotHitFrom);
 
         //Unparents the death particle effect, plays the particle effect & audio, then destroys it once it has finished
         enemyDeathParticle.transform.parent = null;

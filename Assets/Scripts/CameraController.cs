@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     //How far away the camara should be when the mouse is at the edge of the screen
     float cameraDistance = 3.5f;
     //how quickly the camera will move to its target position
-    float smoothTime = 0.15f;
+    public float smoothTime = 0.15f;
 
 
     private void Awake()

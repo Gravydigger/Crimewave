@@ -9914,8 +9914,8 @@ MonoBehaviour:
   maxHealth: 4
   currentHealth: 0
   damageAmount: 1
-  alertRadius: 5
-  findPlayerOvershoot: 5
+  alertRadius: 3
+  findPlayerDedication: -1
   knockbackDistance: 0.5
   gotHitFrom: {x: 0, y: 0}
   playerLastSeen: {x: 0, y: 0}

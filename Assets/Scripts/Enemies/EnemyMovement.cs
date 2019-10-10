@@ -13,11 +13,11 @@ public class EnemyMovement : MonoBehaviour
     SpriteRenderer flip;
     Animator animator;
     [HideInInspector] public Vector3 enemyPos;
-    [HideInInspector] public Vector2 target;
-    public Vector2 estimatedTarget;
+    [HideInInspector] public Vector2 target, estimatedTarget;
     private new Rigidbody2D rigidbody;
 
     private int direction = 0;
+    private bool friendsPinged = false;
 
     private void Awake()
     {
@@ -25,8 +25,8 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         flip = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
-        instance = this;
         enemy = GetComponent<SpriteRenderer>();
+        instance = this;
     }
 
     private void Start()
@@ -47,50 +47,59 @@ public class EnemyMovement : MonoBehaviour
 
     void DetectPlayer()
     {
-        //Moves the enemy in cardinal directions if it sees the player
+        //Moves the enemy if it sees the player
         if (EM.detectPlayer || estimatedTarget != Vector2.zero)
         {
+            //If it can see the player...
             if (EM.detectPlayer)
             {
+                //Move towards player
                 target = CM.playerPosition;
                 MoveEnemy(target);
+
+                //If it already hasn't, tell its friends
+                if (!friendsPinged)
+                    AlertFriends(target);
+                friendsPinged = true;
             }
 
-            else
+            //go to where it friends told it
+            else if (estimatedTarget != Vector2.zero)
                 MoveEnemy(estimatedTarget);
             
+            //reset other detection methods
             if (EM.playerLastSeen != Vector2.zero || EM.gotHit)
             {
                 EM.playerLastSeen = Vector2.zero;
                 EM.gotHit = false;
             }
 
+            //When it reaches it's destination, stand still
             if (Vector2.Distance(transform.position, estimatedTarget) < 0.01f)
             {
                 estimatedTarget = Vector2.zero;
             }
-
         }
 
         //Moves to where it last saw the player
         else if (EM.playerLastSeen != Vector2.zero)
         {
-            //go to where the player was lasts seen, and overshoot a certain distance
+            //go to where the player was lasts seen, and overshoot a certain distance (and alert friends)
             target = EM.playerLastSeen;
             AlertFriends(target);
             float magnitude = target.magnitude;
             target.Normalize();
-            target *= magnitude + EM.findPlayerOvershoot;
-
+            target *= magnitude + EM.findPlayerDedication;
+            target += Random.insideUnitCircle / 2f;
             MoveEnemy(target);
+
             if (Vector2.Distance(transform.position, target) < 0.01f)
             {
-                EM.gotHit = false;
                 EM.playerLastSeen = Vector2.zero;
             }
         }
 
-        //Moves to where it was shot from if it cannot see the player currently
+        //Moves to where it was shot from
         else if (EM.gotHit)
         {
             target = EM.gotHitFrom;
@@ -100,7 +109,6 @@ public class EnemyMovement : MonoBehaviour
             if (Vector2.Distance(transform.position, target) < 0.01f)
             {
                 EM.gotHit = false;
-
             }
         }
     }
@@ -111,19 +119,20 @@ public class EnemyMovement : MonoBehaviour
 
         foreach (Collider2D enemyInRange in hitColliders)
         {
-            
-            EnemyMovement currentEnemy = enemyInRange.GetComponent<EnemyMovement>();
-            if (currentEnemy != null)
+            if (!enemyInRange.isTrigger)
             {
-                //float magnitude = target.magnitude;
-                //target.Normalize();
-                //target *= magnitude + EM.findPlayerOvershoot;
-                //target += Random.insideUnitCircle;
-                currentEnemy.estimatedTarget = target;
+                EnemyMovement currentEnemy = enemyInRange.GetComponent<EnemyMovement>();
+                if (currentEnemy != null)
+                {
+                    float magnitude = target.magnitude;
+                    target.Normalize();
+                    target *= magnitude + EM.findPlayerDedication;
+                    target += Random.insideUnitCircle / 2f;
+                    currentEnemy.estimatedTarget = target;
+                }
             }
         }
     }
-
 
     private void MovingDirection()
     {
@@ -144,7 +153,6 @@ public class EnemyMovement : MonoBehaviour
 
         else
             direction = 0;
-
     }
 
     //Makes the enemy move towards a target (will be replaced with pathfinding code eventually)
