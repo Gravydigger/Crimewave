@@ -12,13 +12,11 @@ public class WeaponController : MonoBehaviour
     CharacterManager CM;
     GameManager GM;
 
-    public AudioSource bowDrawn;
-    public AudioSource bowFire;
+    public AudioSource bowDrawn, bowFire;
 
     [SerializeField] Sprite[] bowSprites;
 
-    float leftOffset;
-    float rightOffset;
+    float leftOffset, rightOffset;
     private Vector3 offset;
     [HideInInspector] public Vector3 target;
 

@@ -86,12 +86,11 @@ public class EnemyMovement : MonoBehaviour
         {
             //go to where the player was lasts seen, and overshoot a certain distance (and alert friends)
             target = EM.playerLastSeen;
-            AlertFriends(target);
-            float magnitude = target.magnitude;
-            target.Normalize();
-            target *= magnitude + EM.findPlayerDedication;
-            target += Random.insideUnitCircle / 2f;
             MoveEnemy(target);
+
+            RandomiseTargetPos(target);
+            AlertFriends(target);
+            
 
             if (Vector2.Distance(transform.position, target) < 0.01f)
             {
@@ -113,8 +112,10 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    //makes nearby enemies fo towards the player
     public void AlertFriends(Vector2 target)
     {
+        //sees if the colider is the hitbox (BoxCollider2D) and an enemy
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, EM.alertRadius);
 
         foreach (Collider2D enemyInRange in hitColliders)
@@ -124,14 +125,22 @@ public class EnemyMovement : MonoBehaviour
                 EnemyMovement currentEnemy = enemyInRange.GetComponent<EnemyMovement>();
                 if (currentEnemy != null)
                 {
-                    float magnitude = target.magnitude;
-                    target.Normalize();
-                    target *= magnitude + EM.findPlayerDedication;
-                    target += Random.insideUnitCircle / 2f;
+                    //Go towards the target in a semi-random location
+                    RandomiseTargetPos(target);
                     currentEnemy.estimatedTarget = target;
                 }
             }
         }
+    }
+
+    //Takes a vector and semi-randomises the target
+    private Vector2 RandomiseTargetPos(Vector2 target)
+    {
+        float magnitude = target.magnitude;
+        target.Normalize();
+        target *= magnitude + EM.findPlayerDedication;
+        target += Random.insideUnitCircle / 2f;
+        return target;
     }
 
     private void MovingDirection()

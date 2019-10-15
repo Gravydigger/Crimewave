@@ -12,11 +12,9 @@ public class EnemyManager : MonoBehaviour
 
     public static UnityEvent onAnyEnemyDeath = new UnityEvent();
 
-    public ParticleSystem enemyHurtParticle;
-    public ParticleSystem enemyDeathParticle;
+    public ParticleSystem enemyHurtParticle, enemyDeathParticle;
 
-    public AudioSource enemyHurtSound;
-    public AudioSource enemyDeathSound;
+    public AudioSource enemyHurtSound, enemyDeathSound;
 
     public float enemySpeed = 6f;
     public int maxHealth = 2;
@@ -27,8 +25,7 @@ public class EnemyManager : MonoBehaviour
     public float knockbackDistance = 3f;
     private new Rigidbody2D rigidbody;
 
-    [HideInInspector] public Vector2 gotHitFrom;
-    [HideInInspector] public Vector2 playerLastSeen;
+    [HideInInspector] public Vector2 gotHitFrom, playerLastSeen;
 
     public bool detectPlayer = false;
     public bool gotHit = false;

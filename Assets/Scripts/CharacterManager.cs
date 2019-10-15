@@ -11,15 +11,12 @@ public class CharacterManager : MonoBehaviour
 
     CharacterMovement CM;
 
-    public ParticleSystem bleed;
-    public ParticleSystem playerHitParticle;
-    public ParticleSystem playerDeathParticle;
+    public ParticleSystem bleed, playerHitParticle, playerDeathParticle;
 
-    public AudioSource playerHurtSound;
-    public AudioSource playerDeathSound;
+    public AudioSource playerHurtSound, playerDeathSound;
 
     [HideInInspector] public int maxHealth = 6;
-    public int currentHealth = 6;
+    [HideInInspector] public int currentHealth = 6;
     [HideInInspector] public bool isPlayerDead = false;
 
     public float invincibilityDuration = 1f;
