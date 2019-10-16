@@ -11,8 +11,8 @@ public class TutorialKeyboard : MonoBehaviour
     Vector3 offset;
     Color startingColor;
     float fadeDelay = 0;
-    public float fadeDelayDuration = 5f;
-    public float beginFadeDelay = 0.5f;
+    float fadeDelayDuration = 1f;
+    float beginFadeDelay = 0.25f;
     bool beginFade = false;
 
     private void Awake()
@@ -32,6 +32,7 @@ public class TutorialKeyboard : MonoBehaviour
         //Follows player
         transform.position = player.transform.position + offset;
 
+        //when player moves, start to fade out
         if (IC.moveUp || IC.moveLeft || IC.moveDown || IC.moveRight)
             beginFade = true;
 
@@ -41,6 +42,7 @@ public class TutorialKeyboard : MonoBehaviour
 
             if (fadeDelay >= beginFadeDelay)
             {
+                //turn the tutorial invisable
                 sprite.color = Color.LerpUnclamped(startingColor, Color.clear, (fadeDelay - beginFadeDelay) / fadeDelayDuration);
 
                 if (fadeDelay > fadeDelayDuration + 0.01f)

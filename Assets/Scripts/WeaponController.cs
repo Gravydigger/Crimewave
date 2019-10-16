@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
     private Vector3 offset;
     [HideInInspector] public Vector3 target;
 
-    private float fireDelay = 0;
+    [HideInInspector] public float fireDelay = 0;
     public float fireDelayDuration = 2;
 
     private void Awake()
@@ -89,7 +89,7 @@ public class WeaponController : MonoBehaviour
     private void Fire()
     {
         //allows the bow to be shot
-        if (Input.GetButton("Fire1") == true)
+        if (Input.GetButton("Fire1"))
         {
             if (Input.GetButtonDown("Fire1"))
                 bowDrawn.Play();
@@ -101,7 +101,7 @@ public class WeaponController : MonoBehaviour
         }
 
         //If fireDelay is less than fireDelayDuration, don't fire an arrow
-        if (Input.GetButtonUp("Fire1") == true && fireDelay < fireDelayDuration)
+        if (Input.GetButtonUp("Fire1") && fireDelay < fireDelayDuration)
         {
             spriteRenderer.sprite = bowSprites[0];
             fireDelay = 0;
@@ -112,7 +112,7 @@ public class WeaponController : MonoBehaviour
         {
             spriteRenderer.sprite = bowSprites[2];
 
-            if (Input.GetButtonUp("Fire1") == true)
+            if (Input.GetButtonUp("Fire1"))
             {
                 spriteRenderer.sprite = bowSprites[0];
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         gameOverLost.SetActive(false);
         gamePaused.SetActive(false);
         instance = this;
-        crossHairOffset = new Vector2(3.5f, 3.5f);
+        crossHairOffset = new Vector2(35f, 35f);
 
         EnemyManager.onAnyEnemyDeath.AddListener(OnEnemyDead);
         CharacterManager.onPlayerDeath.AddListener(OnPlayerDeath);
