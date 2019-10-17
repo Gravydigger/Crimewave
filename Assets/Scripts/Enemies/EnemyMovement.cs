@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     SpriteRenderer flip;
     Animator animator;
     [HideInInspector] public Vector3 enemyPos;
-    [HideInInspector] public Vector2 target, estimatedTarget;
+    public Vector2 target, estimatedTarget;
     private new Rigidbody2D rigidbody;
 
     private int direction = 0;
@@ -40,9 +40,9 @@ public class EnemyMovement : MonoBehaviour
 
         DetectPlayer();
 
-        FlipEnemy();
-
         MovingDirection();
+
+        FlipEnemy();
     }
 
     void DetectPlayer()
@@ -61,6 +61,8 @@ public class EnemyMovement : MonoBehaviour
                 if (!friendsPinged)
                     AlertFriends(target);
                 friendsPinged = true;
+
+                estimatedTarget = Vector2.zero;
             }
 
             //go to where it friends told it
@@ -145,7 +147,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void MovingDirection()
     {
-        if (EM.detectPlayer)
+        if (EM.detectPlayer || EM.gotHit || EM.playerLastSeen != Vector2.zero || estimatedTarget != Vector2.zero)
         {
             //if moving left, give a negitive direction
             if (CM.playerPosition.x > transform.position.x)
@@ -154,14 +156,14 @@ public class EnemyMovement : MonoBehaviour
             }
 
             //if moving right, give positive direction
-            if (CM.playerPosition.x < transform.position.x)
+            else if (CM.playerPosition.x < transform.position.x)
             {
                 direction = 1;
             }
-        }
 
-        else
-            direction = 0;
+            else
+                direction = 0;
+        }
     }
 
     //Makes the enemy move towards a target (will be replaced with pathfinding code eventually)
