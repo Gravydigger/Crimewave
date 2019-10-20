@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     SpriteRenderer flip;
     Animator animator;
     [HideInInspector] public Vector3 enemyPos;
-    public Vector2 target, estimatedTarget;
+    [HideInInspector] public Vector2 target, estimatedTarget;
     private new Rigidbody2D rigidbody;
 
     private int direction = 0;

@@ -107,7 +107,7 @@ public class EnemyManager : MonoBehaviour
             OnDeath();
     }
 
-    //Knocks back the enemy in the oppostie direction that they were hit
+    //Knocks back the enemy in the opposite direction that they were hit
     private void KnockBack(Vector3 arrowPos)
     {
         Vector2 knockbackDirection = EM.enemyPos - arrowPos;
