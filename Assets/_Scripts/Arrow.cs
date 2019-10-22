@@ -5,7 +5,6 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     WeaponController WC;
-    //EnemyManager EM;
     CharacterMovement CM;
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] arrowSprites;
@@ -15,8 +14,22 @@ public class Arrow : MonoBehaviour
 
     private bool hasCollided = false;
 
+    public ArrowType arrowType;
+
     public float arrowVelocity = 1f;
-    public int arrowDamage = 2;
+    public int arrowDamage
+    {
+        get {
+            // return arrowType != null ? arrowType.arrowDamage : 2;
+            if (arrowType != null)
+                return arrowType.arrowDamage;
+            else
+                return 2;
+        }
+    }
+
+
+
     //for ArrowDecay()
     private bool toggleDecay = false;
     private float alpha = 0;
@@ -31,7 +44,6 @@ public class Arrow : MonoBehaviour
 
     void Start()
     {
-        //EM = EnemyManager.instance;
         WC = WeaponController.instance;
         CM = CharacterMovement.instance;
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), CM.GetComponent<BoxCollider2D>());
@@ -84,6 +96,11 @@ public class Arrow : MonoBehaviour
             EnemyManager EM = targetRigidbody.GetComponent<EnemyManager>();
             EM.TakeDamage(arrowDamage, transform.position, firedFrom);
             Destroy(gameObject);
+        }
+
+        if (arrowType && arrowType.arrowDamageType == ArrowType.ArrowDamageType.explosive)
+        {
+
         }
     }
 

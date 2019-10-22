@@ -6,7 +6,6 @@ using UnityEngine;
 public class Dialogue
 {
 
-
     public string nameIdentifier;
 
     [TextArea(1, 3)]

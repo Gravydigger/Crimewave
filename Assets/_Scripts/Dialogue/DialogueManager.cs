@@ -51,13 +51,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
-        //StopAllCoroutines();
-        //StartCoroutine(TypeSentence(sentences));
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
 
         dialougeText.text = sentence;
     }
 
-    /*IEnumerable TypeSentence (string sentence)
+    IEnumerator TypeSentence(string sentence)
     {
         dialougeText.text = "";
         foreach (char letter in sentence.ToCharArray())
@@ -65,7 +65,7 @@ public class DialogueManager : MonoBehaviour
             dialougeText.text += letter;
             yield return null;
         }
-    }*/
+    }
 
     public void EndDialogue()
     {
