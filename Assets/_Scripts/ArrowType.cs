@@ -9,7 +9,7 @@ public class ArrowType : ScriptableObject
     public int arrowDamage = 2;
     public float arrowVelocity = 10;
 
-    [Tooltip("special features")]
+    //[Tooltip("Special Features")]
     public ArrowDamageType arrowDamageType;
 
     public enum ArrowDamageType
@@ -19,17 +19,11 @@ public class ArrowType : ScriptableObject
         incendiary,
     }
 
-    //Variables for type "normal"
-    //public ArrowDamageType damageTypeNormal = ArrowDamageType.normal;
-
     //Variables for type "Explosive"
-    //public ArrowDamageType damageTypeExplosive = ArrowDamageType.explosive;
-    public float explosiveRadius = 3f;
-    public int explosiveDamage = 1;
+    [HideInInspector] public float explosiveRadius = 3f;
+    [HideInInspector] public int explosiveDamage = 1;
 
     //Variables for type "Poison"
-    //public ArrowDamageType damageTypeIncendiary = ArrowDamageType.incendiary;
-    public float incendiaryDuration = 5f;
-    public int incendiaryDamage = 1;
-
+    [HideInInspector] public float incendiaryDuration = 5f;
+    [HideInInspector] public int incendiaryDamage = 1;
 }

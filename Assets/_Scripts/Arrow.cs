@@ -16,19 +16,25 @@ public class Arrow : MonoBehaviour
 
     public ArrowType arrowType;
 
-    public float arrowVelocity = 1f;
-    public int arrowDamage
+    public float arrowVelocity
     {
-        get {
-            // return arrowType != null ? arrowType.arrowDamage : 2;
-            if (arrowType != null)
-                return arrowType.arrowDamage;
-            else
-                return 2;
+        get
+        {
+            return arrowType != null ? arrowType.arrowVelocity : 10f;
         }
     }
 
-
+    public int arrowDamage
+    {
+        get
+        {
+            return arrowType != null ? arrowType.arrowDamage : 2;
+            /*if (arrowType != null)
+                return arrowType.arrowDamage;
+            else
+                return 2;*/
+        }
+    }
 
     //for ArrowDecay()
     private bool toggleDecay = false;
@@ -47,6 +53,7 @@ public class Arrow : MonoBehaviour
         WC = WeaponController.instance;
         CM = CharacterMovement.instance;
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), CM.GetComponent<BoxCollider2D>());
+
         currentTarget = WC.target;
         firedFrom = CM.playerPosition;
     }

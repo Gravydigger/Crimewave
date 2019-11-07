@@ -5,26 +5,28 @@ using UnityEditor;
 [CustomEditor(typeof(ArrowType))]
 public class ArrowTypeCustomInspector : Editor
 {
-    /*public override void OnInspectorGUI()
+    public override void OnInspectorGUI()
     {
+        //Draws the fields in the inspector as it would normally
         ArrowType arrowType = (ArrowType)target;
 
-        arrowType.arrowDamage = EditorGUILayout.IntField("Arrow Damage", arrowType.arrowDamage);
-        arrowType.arrowVelocity = EditorGUILayout.FloatField("Arrow Velocity", arrowType.arrowVelocity);
-        //arrowType.arrowSprites = EditorGUILayout;
+        serializedObject.Update();
 
-        arrowType.damageTypeNormal = (ArrowType.ArrowDamageType)EditorGUILayout.EnumPopup("Damage Type", arrowType.damageTypeNormal);
+        DrawDefaultInspector();
 
-        if (arrowType.damageTypeNormal == ArrowType.ArrowDamageType.explosive)
+        //If the arrow type is explosive, show related property fields
+        if (arrowType.arrowDamageType == ArrowType.ArrowDamageType.explosive)
         {
-            arrowType.explosiveRadius = EditorGUILayout.FloatField("Explosive Radius", arrowType.explosiveRadius);
-            arrowType.explosiveDamage = EditorGUILayout.IntField("Explosive Damage", arrowType.explosiveDamage);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("explosiveDamage"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("explosiveRadius"));
         }
 
-        if (arrowType.damageTypeNormal == ArrowType.ArrowDamageType.incendiary)
+        //If the arrow type is explosive, show related property fields
+        if (arrowType.arrowDamageType == ArrowType.ArrowDamageType.incendiary)
         {
-            arrowType.incendiaryDuration = EditorGUILayout.FloatField("Poison Duration", arrowType.incendiaryDuration);
-            arrowType.incendiaryDamage = EditorGUILayout.IntField("Poison Damage", arrowType.incendiaryDamage);
-        }*/
-    
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("incendiaryDuration"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("incendiaryDamage"));
+        }
+        serializedObject.ApplyModifiedProperties();
+    }
 }
