@@ -10,33 +10,17 @@ public class Arrow : MonoBehaviour
     [SerializeField] Sprite[] arrowSprites;
 
     private Vector2 currentTarget;
-    private Vector2 firedFrom;
+    [HideInInspector] public Vector2 firedFrom;
 
     private bool hasCollided = false;
 
     public ArrowType arrowType;
 
-    public float arrowVelocity
-    {
-        get
-        {
-            return arrowType != null ? arrowType.arrowVelocity : 10f;
-        }
-    }
+    public float arrowVelocity = 10f;
 
-    public int arrowDamage
-    {
-        get
-        {
-            return arrowType != null ? arrowType.arrowDamage : 2;
-            /*if (arrowType != null)
-                return arrowType.arrowDamage;
-            else
-                return 2;*/
-        }
-    }
+    public int arrowDamage = 2;
 
-    //for ArrowDecay()
+    //for ArrowDecay function
     private bool toggleDecay = false;
     private float alpha = 0;
     public float alphaDuration = 1f;
@@ -94,6 +78,8 @@ public class Arrow : MonoBehaviour
             hasCollided = true;
             transform.Translate(Vector3.right * 0.2f, Space.Self);
             toggleDecay = true;
+
+            TriggerPayLoad();
         }
 
         //See if arrow has hit an enemy
@@ -102,13 +88,17 @@ public class Arrow : MonoBehaviour
         {
             EnemyManager EM = targetRigidbody.GetComponent<EnemyManager>();
             EM.TakeDamage(arrowDamage, transform.position, firedFrom);
+            TriggerPayLoad();
             Destroy(gameObject);
         }
+    }
 
-        if (arrowType && arrowType.arrowDamageType == ArrowType.ArrowDamageType.explosive)
-        {
-
-        }
+    void TriggerPayLoad()
+    {
+        //When the function is called, find scripts with the interface IPayLoad, and run the Deliver() function 
+        IPayload[] payloads = GetComponents<IPayload>();
+        foreach (IPayload payload in payloads)
+            payload.Deliver();
     }
 
     //Turns arrows into scenery, slowly makes then invisible, and then destroys the gameObject 

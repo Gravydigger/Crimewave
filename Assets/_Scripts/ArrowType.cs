@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="ArrowType", menuName = "ArrowType")]
+//[CreateAssetMenu(fileName ="ArrowType", menuName = "ArrowType")]
 public class ArrowType : ScriptableObject
 {
     public Sprite[] arrowSprites;
