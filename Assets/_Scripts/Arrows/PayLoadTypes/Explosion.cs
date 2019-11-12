@@ -25,7 +25,7 @@ public class Explosion : MonoBehaviour, IPayload
         CreateExplosion();
 
         //Show an explosion effect
-        ExplosionGraphic();
+        //ExplosionGraphic();
 
         Destroy(gameObject);
     }

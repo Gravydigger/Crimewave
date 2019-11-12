@@ -23,8 +23,8 @@ public class Arrow : MonoBehaviour
     //for ArrowDecay function
     private bool toggleDecay = false;
     private float alpha = 0;
-    public float alphaDuration = 1f;
-    public float decayDelayDuration = 1f;
+    private float alphaDuration = 4f;
+    private float decayDelayDuration = 1f;
     private float decayDelay = 0;
 
     private void Awake()
@@ -55,6 +55,7 @@ public class Arrow : MonoBehaviour
             spriteRenderer.sprite = arrowSprites[1];
             //Toggle decay
             toggleDecay = true;
+            TriggerPayLoad();
         }
         
         if (toggleDecay)
