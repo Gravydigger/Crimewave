@@ -6,7 +6,7 @@ using UnityEngine;
 public class Explosion : MonoBehaviour, IPayload
 {
     Arrow arrow;
-    public ParticleSystem explosionGraphic;
+    public Animator explosionGraphic;
     public AudioSource explosionSound;
 
     public int explosiveDamage = 1;
@@ -25,7 +25,7 @@ public class Explosion : MonoBehaviour, IPayload
         CreateExplosion();
 
         //Show an explosion effect
-        //ExplosionGraphic();
+        ExplosionGraphic();
 
         Destroy(gameObject);
     }
@@ -52,10 +52,13 @@ public class Explosion : MonoBehaviour, IPayload
     {
         //Unparents the explosion particle effect, plays audio, shakes the camera, then destroys it once it has finished
         explosionGraphic.transform.parent = null;
-        explosionGraphic.Play();
+        explosionGraphic.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        explosionGraphic.Play("Explosion");
+
         explosionSound.Play();
         //TO-DO: Shake the camera (https://wiki.unity3d.com/index.php/Camera_Shake)
-        Destroy(explosionGraphic.gameObject, explosionGraphic.main.duration + 0.1f);
+        Destroy(explosionGraphic.gameObject, 1f);
     }
 
 }
