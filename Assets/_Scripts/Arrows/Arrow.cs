@@ -7,14 +7,14 @@ public class Arrow : MonoBehaviour
     WeaponController WC;
     CharacterMovement CM;
     SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite[] arrowSprites;
+    public Sprite[] arrowSprites;
 
     private Vector2 currentTarget;
     [HideInInspector] public Vector2 firedFrom;
 
     private bool hasCollided = false;
 
-    public ArrowType arrowType;
+    //public ArrowType arrowType;
 
     public float arrowVelocity = 10f;
 

@@ -288,7 +288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   spriteRenderer: {fileID: 3778804573095627036}
-  arrow: {fileID: 4068382498348720816, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
+  arrowType:
+  - {fileID: 4068382498348720816, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
+  - {fileID: 6308766578911691823, guid: efcf12c8d1aa3ca428c847a4534b9241, type: 3}
   bowDrawn: {fileID: 7217643801647184266}
   bowFire: {fileID: 6004272525939008031}
   bowSprites:

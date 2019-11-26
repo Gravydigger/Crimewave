@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class WeaponController : MonoBehaviour
 {
     public GameObject player;
     public static WeaponController instance;
     public SpriteRenderer spriteRenderer;
-    public Rigidbody2D arrow;
+    public Rigidbody2D[] arrowType;
+    Rigidbody2D arrow;
+
     InputController IC;
     CharacterManager CM;
     GameManager GM;
@@ -25,6 +28,7 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
+        arrow = arrowType[0];
         instance = this;
         offset = transform.position - player.transform.position;
         leftOffset = -offset.x;
@@ -86,10 +90,20 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    public void SetArrow(int index)
+    {
+        arrow = arrowType[index];
+    }
+
+    public void SetArrow(Arrow arr)
+    {
+        arrow = arr.GetComponent<Rigidbody2D>();
+    }
+
     private void Fire()
     {
         //allows the bow to be shot
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && EventSystem.current.IsPointerOverGameObject() == false)
         {
             if (Input.GetButtonDown("Fire1"))
                 bowDrawn.Play();

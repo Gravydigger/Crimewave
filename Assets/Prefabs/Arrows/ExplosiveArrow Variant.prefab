@@ -209,7 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionGraphic: {fileID: 8992684045271697394}
-  sprite: {fileID: 2492152318513065592}
   explosionSound: {fileID: 8870557280928800136}
   explosiveDamage: 1
   explosiveRadius: 3
@@ -224,6 +223,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ExplosiveArrow Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068382498348720816, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.1058137
       objectReference: {fileID: 0}
     - target: {fileID: 8037120057638536189, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
         type: 3}
@@ -280,11 +284,64 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536186, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0d9cace8288b0d40918a2e7f56ce34a,
+        type: 3}
+    - target: {fileID: 8037120057638536186, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536187, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536187, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536187, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.09228504
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536187, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.56427693
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536187, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.033763945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536187, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.18752086
+      objectReference: {fileID: 0}
     - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
         type: 3}
       propertyPath: arrowDamage
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: arrowSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: a0d9cace8288b0d40918a2e7f56ce34a,
+        type: 3}
+    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: arrowSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300002, guid: a0d9cace8288b0d40918a2e7f56ce34a,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 3976569751779326702, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
