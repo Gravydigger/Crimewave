@@ -8,13 +8,17 @@ public class ArrowUI : MonoBehaviour
     public Arrow arrow;
     public WeaponController weaponController;
     public Image arrowImage;
+    Image buttonImage;
 
     void Start()
     {
         //Automatically detects when the button is clicked, and calls the function OnClick()
         Button button = GetComponent<Button>();
+        buttonImage = GetComponent<Image>();
+
         if (button != null)
             button.onClick.AddListener(OnClick);
+
     }
 
     void OnClick()
@@ -30,5 +34,14 @@ public class ArrowUI : MonoBehaviour
         weaponController = wc;
         if (arrowImage)
             arrowImage.sprite = arrow.arrowSprites[0];
+    }
+
+    //If the arrow is selected, change the colour to yellow. Otherwise leave it as white
+    public void SetSelected(bool selected)
+    {
+        buttonImage.color = selected ? Color.yellow : Color.white;
+
+        if (selected)
+            weaponController.SetArrow(arrow);
     }
 }
