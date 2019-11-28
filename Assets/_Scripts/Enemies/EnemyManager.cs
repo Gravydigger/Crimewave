@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyManager : MonoBehaviour, IHealth
+public class EnemyManager : Health
 {
     [HideInInspector] public EnemyManager instance;
     EnemyMovement EM;
@@ -12,14 +12,9 @@ public class EnemyManager : MonoBehaviour, IHealth
 
     public static UnityEvent onAnyEnemyDeath = new UnityEvent();
 
-    public ParticleSystem enemyHurtParticle, enemyDeathParticle;
-
-    public AudioSource enemyHurtSound, enemyDeathSound;
-
     public float enemySpeed = 6f;
-    public int maxHealth = 2;
-    public int currentHealth = 1;
     public int damageAmount = 1;
+    public Status status;
     public float alertRadius = 5f;
     public float findPlayerDedication = 5f;
     public float knockbackDistance = 3f;
@@ -29,7 +24,6 @@ public class EnemyManager : MonoBehaviour, IHealth
 
     public bool detectPlayer = false;
     public bool gotHit = false;
-    [HideInInspector] public bool isDead = false;
 
     private void Awake()
     {
@@ -71,6 +65,8 @@ public class EnemyManager : MonoBehaviour, IHealth
         {
             CharacterManager CM = collision.gameObject.GetComponent<CharacterManager>();
             CM.TakeDamage(damageAmount, rigidbody);
+            if (status != null)
+                CM.ApplyStatus(status);
         }
     }
 
@@ -87,12 +83,12 @@ public class EnemyManager : MonoBehaviour, IHealth
         if (currentHealth > 0 && !isDead)
         {
             //Spawn hit particle FX 
-            ParticleSystem HitInstance = Instantiate(enemyHurtParticle, transform.position, transform.rotation) as ParticleSystem;
+            ParticleSystem HitInstance = Instantiate(hurtParticle, transform.position, transform.rotation) as ParticleSystem;
             HitInstance.Play();
             Destroy(HitInstance.gameObject, HitInstance.main.duration + 0.1f);
 
             //Play a hit SFX
-            enemyHurtSound.Play();
+            hurtSound.Play();
         }
 
         //Knocks back the enemy
@@ -124,7 +120,7 @@ public class EnemyManager : MonoBehaviour, IHealth
             currentHealth = maxHealth;
     }
 
-    public void OnDeath()
+    public override void OnDeath()
     {
         //Tells game the enemy is dead, and makes sure it can't revive
         isDead = true;
@@ -138,19 +134,12 @@ public class EnemyManager : MonoBehaviour, IHealth
         EM.AlertFriends(gotHitFrom);
 
         //Unparents the death particle effect, plays the particle effect & audio, then destroys it once it has finished
-        enemyDeathParticle.transform.parent = null;
-        enemyDeathParticle.Play();
-        enemyDeathSound.Play();
-        Destroy(enemyDeathParticle.gameObject, enemyDeathParticle.main.duration + 0.1f);
+        deathParticle.transform.parent = null;
+        deathParticle.Play();
+        deathSound.Play();
+        Destroy(deathParticle.gameObject, deathParticle.main.duration + 0.1f);
 
         //Destroys the enemy gameObject
         Destroy(gameObject);
-    }
-
-    public void ApplyDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0 && !isDead)
-            OnDeath();
     }
 }

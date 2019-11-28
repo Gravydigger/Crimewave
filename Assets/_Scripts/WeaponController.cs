@@ -51,7 +51,7 @@ public class WeaponController : MonoBehaviour
             Fire();
         }
 
-        if (CM.isPlayerDead)
+        if (CM.isDead)
             gameObject.SetActive(false);
     }
 
@@ -83,11 +83,13 @@ public class WeaponController : MonoBehaviour
         if (IC.mouseXCoord < 0)
         {
             offset.x = leftOffset;
+            spriteRenderer.flipY = true;
         }
 
         if (IC.mouseXCoord >= 0)
         {
             offset.x = rightOffset;
+            spriteRenderer.flipY = false;
         }
     }
 

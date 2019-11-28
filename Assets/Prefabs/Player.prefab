@@ -9750,14 +9750,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ab1829ea92a1f41b90af394196867e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bleed: {fileID: 6637614119422795758}
-  playerHitParticle: {fileID: 6637614119584891130}
-  playerDeathParticle: {fileID: 1737834204631476377}
-  playerHurtSound: {fileID: 1545460963681133789}
-  playerDeathSound: {fileID: 9036889922241058133}
   maxHealth: 6
   currentHealth: 6
-  isPlayerDead: 0
+  hurtSound: {fileID: 1545460963681133789}
+  deathSound: {fileID: 9036889922241058133}
+  hurtParticle: {fileID: 6637614119584891130}
+  deathParticle: {fileID: 1737834204631476377}
+  statusEffects: []
+  isDead: 0
+  bleed: {fileID: 6637614119422795758}
   invincibilityDuration: 1
   invincibilityDelay: 0
   isInvincible: 0

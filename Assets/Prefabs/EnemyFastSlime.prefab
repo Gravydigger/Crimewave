@@ -5043,14 +5043,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd432577ba2c3b743abd6887da2719e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  enemyHurtParticle: {fileID: 911493181667326477}
-  enemyDeathParticle: {fileID: 2072413292842140892}
-  enemyHurtSound: {fileID: 6515027186220075718}
-  enemyDeathSound: {fileID: 7490400224900864588}
-  enemySpeed: 7
   maxHealth: 1
   currentHealth: 0
+  hurtSound: {fileID: 6515027186220075718}
+  deathSound: {fileID: 7490400224900864588}
+  hurtParticle: {fileID: 911493181667326477}
+  deathParticle: {fileID: 2072413292842140892}
+  statusEffects: []
+  isDead: 0
+  instance: {fileID: 0}
+  enemySpeed: 7
   damageAmount: 1
   alertRadius: 3
   findPlayerDedication: -1
@@ -5059,7 +5061,6 @@ MonoBehaviour:
   playerLastSeen: {x: 0, y: 0}
   detectPlayer: 0
   gotHit: 0
-  isDead: 0
 --- !u!114 &911493182620397290
 MonoBehaviour:
   m_ObjectHideFlags: 0

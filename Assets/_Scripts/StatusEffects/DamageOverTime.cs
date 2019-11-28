@@ -7,21 +7,22 @@ using System.Xml.Linq;
 public class DamageOverTime : Status {
 
     public int damagePerTick;
+    [Tooltip("How often in seconds the damage gets applied (e.g. Take damage every 2 seconds).")]
     public float frequency;
 
     // per-instance data
-    public float nextTick = 0;
+    [HideInInspector] public float nextTick = 0;
 
     // do nothing
-    public override void ApplyStatus(IHealth ch) { }
-    public override void RemoveStatus(IHealth ch) { }
+    public override void ApplyStatus(Health hp) { }
+    public override void RemoveStatus(Health hp) { }
 
     // DoT's tick down every frame
-    public override void UpdateStatus(IHealth ch)
+    public override void UpdateStatus(Health hp)
     {
         if (timer > nextTick)
         {
-            ch.ApplyDamage(damagePerTick);
+            hp.ApplyDamage(damagePerTick);
             nextTick += frequency;
         }
     }

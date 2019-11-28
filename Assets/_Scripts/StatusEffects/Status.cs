@@ -9,12 +9,12 @@ public abstract class Status : ScriptableObject {
     public float duration;
 
     // how long its been running currently (per-instance)
-    public float timer;
+    [HideInInspector] public float timer;
 
     // TODO visual FX  that are played by this status
     // TODO icon - if we want icons on the HUD to represent them
 
-    public abstract void ApplyStatus(IHealth ch);
-    public abstract void UpdateStatus(IHealth ch);
-    public abstract void RemoveStatus(IHealth ch);
+    public abstract void ApplyStatus(Health hp);
+    public abstract void UpdateStatus(Health hp);
+    public abstract void RemoveStatus(Health hp);
 }

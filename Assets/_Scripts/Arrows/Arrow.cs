@@ -20,6 +20,8 @@ public class Arrow : MonoBehaviour
 
     public int arrowDamage = 2;
 
+    public Status arrowStatus;
+
     //for ArrowDecay function
     private bool toggleDecay = false;
     private float alpha = 0;
@@ -40,6 +42,11 @@ public class Arrow : MonoBehaviour
 
         currentTarget = WC.target;
         firedFrom = CM.playerPosition;
+
+        if (transform.right.x < 0)
+        {
+            spriteRenderer.flipY = true;
+        }
     }
 
     void Update()
@@ -89,6 +96,10 @@ public class Arrow : MonoBehaviour
         {
             EnemyManager EM = targetRigidbody.GetComponent<EnemyManager>();
             EM.TakeDamage(arrowDamage, transform.position, firedFrom);
+
+            if (arrowStatus != null)
+                EM.ApplyStatus(arrowStatus);
+
             TriggerPayLoad();
             Destroy(gameObject);
         }

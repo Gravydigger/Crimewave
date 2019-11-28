@@ -4,20 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class CharacterManager : MonoBehaviour, IHealth
+public class CharacterManager : Health
 {
     public static CharacterManager instance;
     public static UnityEvent onPlayerDeath = new UnityEvent();
 
     CharacterMovement CM;
 
-    public ParticleSystem bleed, playerHitParticle, playerDeathParticle;
-
-    public AudioSource playerHurtSound, playerDeathSound;
-
-    [HideInInspector] public int maxHealth = 6;
-    [HideInInspector] public int currentHealth = 6;
-    [HideInInspector] public bool isPlayerDead = false;
+    public ParticleSystem bleed;
 
     public float invincibilityDuration = 1f;
     public float invincibilityDelay = 0f;
@@ -36,7 +30,7 @@ public class CharacterManager : MonoBehaviour, IHealth
         instance = this;
         playerSprite = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
+        currentHealth = maxHealth = 6;
         SetHealthUI();
         BleedAmount();
     }
@@ -91,19 +85,19 @@ public class CharacterManager : MonoBehaviour, IHealth
         BleedAmount();
 
         //If the player is not dead
-        if (currentHealth > 0 && !isPlayerDead)
+        if (currentHealth > 0 && !isDead)
         {
             //Spawn hit particle FX
-            ParticleSystem HurtInstance = Instantiate(playerHitParticle, transform.position, transform.rotation) as ParticleSystem;
+            ParticleSystem HurtInstance = Instantiate(hurtParticle, transform.position, transform.rotation) as ParticleSystem;
             HurtInstance.Play();
             Destroy(HurtInstance.gameObject, HurtInstance.main.duration + 0.1f);
 
             //Play hit SFX
-            playerHurtSound.Play();
+            hurtSound.Play();
         }
 
         //If player has 0 or negitive hp, call OnDeath()
-        if (currentHealth <= 0 && !isPlayerDead)
+        if (currentHealth <= 0 && !isDead)
             OnDeath();
     }
 
@@ -141,10 +135,10 @@ public class CharacterManager : MonoBehaviour, IHealth
         rigidbody.AddForce(knockbackDirection * knockbackDistance, ForceMode2D.Impulse);
     }
 
-    public void OnDeath()
+    public override void OnDeath()
     {
         //Tells game player is dead, and makes sure he can't revive
-        isPlayerDead = true;
+        isDead = true;
         isInvincible = false;
         maxHealth = 0;
         currentHealth = 0;
@@ -158,10 +152,10 @@ public class CharacterManager : MonoBehaviour, IHealth
         Debug.Log("Player is dead!");
 
         //Unparents the death particle effect, plays the particle effect & audio, then destroys it once it has finished
-        playerDeathParticle.transform.parent = null;
-        playerDeathParticle.Play();
-        playerDeathSound.Play();
-        Destroy(playerDeathParticle.gameObject, playerDeathParticle.main.duration + 0.1f);
+        deathParticle.transform.parent = null;
+        deathParticle.Play();
+        deathSound.Play();
+        Destroy(deathParticle.gameObject, deathParticle.main.duration + 0.1f);
 
         //Disables the player gameObject
         gameObject.SetActive(false);
@@ -202,12 +196,5 @@ public class CharacterManager : MonoBehaviour, IHealth
         {
             bleed.Stop();
         }
-    }
-
-    public void ApplyDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0 && !isPlayerDead)
-            OnDeath();
     }
 }

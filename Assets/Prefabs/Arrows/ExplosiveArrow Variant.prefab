@@ -241,6 +241,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300002, guid: 44125d147010ed041b9fd6195bb1459c,
         type: 3}
+    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: arrowStatus
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f66150e14062af43bb885ebecf3e5d5,
+        type: 2}
     - target: {fileID: 8037120057638536189, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
