@@ -7,6 +7,8 @@ TextureImporter:
     21300004: SilasBow_Sheet_0
     21300006: SilasBow_Sheet_1
     21300008: SilasBow_Sheet_2
+    21300010: SilasBow_Sheet_3
+    21300012: SilasBow_Sheet_4
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -93,17 +95,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 168
         width: 24
         height: 24
-      alignment: 9
-      pivot: {x: 0.41666666, y: 0.47916666}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06718b09b5e41184c85b7cf84be9ca0c
+      spriteID: 443b00c183e7a714fbc5da4d78d6f24b
       vertices: []
       indices: 
       edges: []
@@ -113,17 +115,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 0
+        y: 168
         width: 24
         height: 24
-      alignment: 9
-      pivot: {x: 0.4166667, y: 0.47916666}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8fd6013fb4b26a4aa51acc5d82e1ee3
+      spriteID: 6fb98eb31db7ef14995250e353bb1e46
       vertices: []
       indices: 
       edges: []
@@ -133,17 +135,57 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 0
+        y: 168
         width: 24
         height: 24
-      alignment: 9
-      pivot: {x: 0.41666666, y: 0.47916666}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e698a4efab0a9224e80dc3989cb51632
+      spriteID: bd60a0b05a65b8342a7cfdaeb7c7e02e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SilasBow_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 144
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f81e38706b2bad5498605b9f5f6110df
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SilasBow_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 144
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb5fd8e7eca8b2342bd1e8353791574c
       vertices: []
       indices: 
       edges: []

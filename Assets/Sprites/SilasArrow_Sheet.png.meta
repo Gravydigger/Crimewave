@@ -4,6 +4,7 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: SilasArrow_Sheet_0
     21300002: SilasArrow_Sheet_1
+    21300004: SilasArrow_Sheet_2
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -90,17 +91,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 112
         width: 16
         height: 16
-      alignment: 9
-      pivot: {x: 0.75, y: 0.46875}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5efc03f1e7b5e534d80e958df83fe643
+      spriteID: 0b202c70eeccf40429b1796672f0d4d5
       vertices: []
       indices: 
       edges: []
@@ -110,17 +111,37 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 0
+        y: 112
         width: 16
         height: 16
-      alignment: 9
-      pivot: {x: 0.75, y: 0.46875}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7902fe93bc396d04da6320bae6b07e26
+      spriteID: 33784ab0fd2bb9f44bbdd1401ac3dff2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SilasArrow_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4f02f2086645be40bd7c4ddf83cf6a2
       vertices: []
       indices: 
       edges: []

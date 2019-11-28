@@ -297,6 +297,8 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   - {fileID: 21300006, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   - {fileID: 21300008, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
+  - {fileID: 21300010, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
+  - {fileID: 21300012, guid: 0420925f7916ce24e9f00aedbc3e4b37, type: 3}
   target: {x: 0, y: 0, z: 0}
   fireDelay: 0
   fireDelayDuration: 0.15

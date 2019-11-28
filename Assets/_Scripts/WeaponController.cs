@@ -10,6 +10,7 @@ public class WeaponController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D[] arrowType;
     Rigidbody2D arrow;
+    public int bowType = 0;
 
     InputController IC;
     CharacterManager CM;
@@ -50,7 +51,7 @@ public class WeaponController : MonoBehaviour
             Fire();
         }
 
-        if (CM.isPlayerDead == true)
+        if (CM.isPlayerDead)
             gameObject.SetActive(false);
     }
 
@@ -90,14 +91,20 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void SetArrow(int index)
-    {
-        arrow = arrowType[index];
-    }
+    //public void SetArrow(int index)
+    //{
+    //    arrow = arrowType[index];
+    //    bowType = index;
+    //}
 
     public void SetArrow(Arrow arr)
     {
         arrow = arr.GetComponent<Rigidbody2D>();
+
+        // find the matching index
+        for (int i = 0; i < arrowType.Length; i++)
+            if (arrowType[i] == arrow)
+                bowType = i;
     }
 
     private void Fire()
@@ -108,7 +115,8 @@ public class WeaponController : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
                 bowDrawn.Play();
 
-            spriteRenderer.sprite = bowSprites[1];
+            //Arrow nocked
+            spriteRenderer.sprite = bowSprites[(bowType * 2) + 1];
 
             //Prevents spam firing
             fireDelay += Time.deltaTime;
@@ -124,7 +132,8 @@ public class WeaponController : MonoBehaviour
         //If fireDelay is equal or greater than fireDelayDuration, fire an arrow
         if (fireDelay >= fireDelayDuration)
         {
-            spriteRenderer.sprite = bowSprites[2];
+            //Arrow drawn
+            spriteRenderer.sprite = bowSprites[(bowType * 2) + 2];
 
             if (Input.GetButtonUp("Fire1"))
             {

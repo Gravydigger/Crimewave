@@ -224,11 +224,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveArrow Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 4068382498348720816, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
         type: 3}
-      propertyPath: m_Mass
-      value: 0.1058137
+      propertyPath: arrowDamage
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: arrowSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300004, guid: 44125d147010ed041b9fd6195bb1459c,
+        type: 3}
+    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+        type: 3}
+      propertyPath: arrowSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300002, guid: 44125d147010ed041b9fd6195bb1459c,
+        type: 3}
     - target: {fileID: 8037120057638536189, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -288,7 +300,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a0d9cace8288b0d40918a2e7f56ce34a,
+      objectReference: {fileID: 21300004, guid: 44125d147010ed041b9fd6195bb1459c,
         type: 3}
     - target: {fileID: 8037120057638536186, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
         type: 3}
@@ -325,23 +337,11 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.18752086
       objectReference: {fileID: 0}
-    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
+    - target: {fileID: 4068382498348720816, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
         type: 3}
-      propertyPath: arrowDamage
-      value: 0
+      propertyPath: m_Mass
+      value: 0.1058137
       objectReference: {fileID: 0}
-    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
-        type: 3}
-      propertyPath: arrowSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: a0d9cace8288b0d40918a2e7f56ce34a,
-        type: 3}
-    - target: {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9,
-        type: 3}
-      propertyPath: arrowSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300002, guid: a0d9cace8288b0d40918a2e7f56ce34a,
-        type: 3}
     m_RemovedComponents:
     - {fileID: 3976569751779326702, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
