@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour, IHealth
 {
     [HideInInspector] public EnemyManager instance;
     EnemyMovement EM;
@@ -145,5 +145,12 @@ public class EnemyManager : MonoBehaviour
 
         //Destroys the enemy gameObject
         Destroy(gameObject);
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0 && !isDead)
+            OnDeath();
     }
 }

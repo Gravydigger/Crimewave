@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class CharacterManager : MonoBehaviour
+public class CharacterManager : MonoBehaviour, IHealth
 {
     public static CharacterManager instance;
     public static UnityEvent onPlayerDeath = new UnityEvent();
@@ -202,5 +202,12 @@ public class CharacterManager : MonoBehaviour
         {
             bleed.Stop();
         }
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0 && !isPlayerDead)
+            OnDeath();
     }
 }
