@@ -15,4 +15,4 @@ MonoBehaviour:
   duration: 0
   timer: 0
   attribute: 0
-  modifier: 0
+  modifier: 50

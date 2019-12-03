@@ -23933,7 +23933,7 @@ MonoBehaviour:
   arrows:
   - {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
   - {fileID: 31920508969215335, guid: efcf12c8d1aa3ca428c847a4534b9241, type: 3}
-  - {fileID: 8037120057638536184, guid: 0c7a8cbc3cc44db45acd8f9e77a6fca9, type: 3}
+  - {fileID: 94288324069414898, guid: ecbc768c147fea844987d671f50e0cdf, type: 3}
   prefab: {fileID: 2283598386858676151, guid: b6e233fb533fb5243ac2695193d28c36, type: 3}
   uiDelayDuration: 5
 --- !u!114 &2129274257
