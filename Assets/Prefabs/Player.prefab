@@ -9582,8 +9582,8 @@ GameObject:
   - component: {fileID: 6637614120047561466}
   - component: {fileID: 6637614120047561465}
   - component: {fileID: 6637614120047561462}
-  - component: {fileID: 6637614120047561467}
   - component: {fileID: 6637614120047561461}
+  - component: {fileID: 6637614120047561467}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -9722,22 +9722,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6637614120047561467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6637614120047561468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80bfcfa350cbcac44a6c2d1171a35409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 6637614120047561462}
-  playerPosition: {x: 0, y: 0, z: 0}
-  playerSpeed: 6
-  flip: {fileID: 6637614120047561464}
 --- !u!114 &6637614120047561461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9752,6 +9736,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 6
   currentHealth: 6
+  entitySpeed: 6
+  speedMultiplier: 1
   hurtSound: {fileID: 1545460963681133789}
   deathSound: {fileID: 9036889922241058133}
   hurtParticle: {fileID: 6637614119584891130}
@@ -9771,6 +9757,20 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b70a7210818ff9143b872c57de97688a, type: 3}
   - {fileID: 21300002, guid: b70a7210818ff9143b872c57de97688a, type: 3}
   - {fileID: 21300004, guid: b70a7210818ff9143b872c57de97688a, type: 3}
+--- !u!114 &6637614120047561467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637614120047561468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bfcfa350cbcac44a6c2d1171a35409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6637614120047561462}
+  playerPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7824030353050079816
 GameObject:
   m_ObjectHideFlags: 0

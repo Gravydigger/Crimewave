@@ -14,7 +14,7 @@ public abstract class Status : ScriptableObject {
     // TODO visual FX  that are played by this status
     // TODO icon - if we want icons on the HUD to represent them
 
-    public abstract void ApplyStatus(Health hp);
-    public abstract void UpdateStatus(Health hp);
-    public abstract void RemoveStatus(Health hp);
+    public abstract void ApplyStatus(EntityBase eb);
+    public abstract void UpdateStatus(EntityBase eb);
+    public abstract void RemoveStatus(EntityBase eb);
 }

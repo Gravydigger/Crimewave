@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyManager : Health
+public class EnemyManager : EntityBase
 {
     [HideInInspector] public EnemyManager instance;
     EnemyMovement EM;
@@ -12,7 +12,6 @@ public class EnemyManager : Health
 
     public static UnityEvent onAnyEnemyDeath = new UnityEvent();
 
-    public float enemySpeed = 6f;
     public int damageAmount = 1;
     public Status status;
     public float alertRadius = 5f;

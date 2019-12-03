@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class CharacterManager : Health
+public class CharacterManager : EntityBase
 {
     public static CharacterManager instance;
     public static UnityEvent onPlayerDeath = new UnityEvent();

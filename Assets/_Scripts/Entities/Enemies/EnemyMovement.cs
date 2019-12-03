@@ -169,7 +169,7 @@ public class EnemyMovement : MonoBehaviour
     //Makes the enemy move towards a target (will be replaced with pathfinding code eventually)
     private void MoveEnemy(Vector2 target)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, EM.enemySpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, EM.entitySpeed * EM.speedMultiplier * Time.deltaTime);
     }
 
     //Flips the enemy sprite depending if the enemy is stationary

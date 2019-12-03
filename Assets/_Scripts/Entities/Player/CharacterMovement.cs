@@ -6,22 +6,26 @@ public class CharacterMovement : MonoBehaviour
 {
     public static CharacterMovement instance;
 
+    CharacterManager CM;
     GameManager GM;
     InputController IC;
-    public Animator animator;
+    Animator animator;
 
-    public Vector3 playerPosition;
-    public float playerSpeed = 6f;
+    [HideInInspector] public Vector3 playerPosition;
+    //public float entitySpeed = 6f;
     private bool isMoving = false;
-    public SpriteRenderer flip;
+    SpriteRenderer flip;
 
     private void Awake()
     {
         instance = this;
+        flip = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
+        CM = CharacterManager.instance;
         IC = InputController.instance;
         GM = GameManager.instance;
     }
@@ -54,26 +58,26 @@ public class CharacterMovement : MonoBehaviour
         /***********************Moving the Character***********************/
         if (IC.moveLeft)
         {
-            transform.Translate(-playerSpeed * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(-CM.entitySpeed * CM.speedMultiplier * Time.fixedDeltaTime, 0, 0);
             isMoving = true;
             flip.flipX = true;
         }
 
         if (IC.moveRight)
         {
-            transform.Translate(playerSpeed * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(CM.entitySpeed * CM.speedMultiplier * Time.fixedDeltaTime, 0, 0);
             isMoving = true;
             flip.flipX = false;
         }
 
         if (IC.moveUp)
         {
-            transform.Translate(0, playerSpeed * Time.fixedDeltaTime, 0);
+            transform.Translate(0, CM.entitySpeed * CM.speedMultiplier * Time.fixedDeltaTime, 0);
         }
 
         if (IC.moveDown)
         {
-            transform.Translate(0, -playerSpeed * Time.fixedDeltaTime, 0);
+            transform.Translate(0, -CM.entitySpeed * CM.speedMultiplier * Time.fixedDeltaTime, 0);
         }
     }
 

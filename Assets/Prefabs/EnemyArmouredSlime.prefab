@@ -9907,6 +9907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
+  entitySpeed: 2
   hurtSound: {fileID: 4271762872994852201}
   deathSound: {fileID: 3918028982783512480}
   hurtParticle: {fileID: 6683073167218819223}
@@ -9914,8 +9915,8 @@ MonoBehaviour:
   statusEffects: []
   isDead: 0
   instance: {fileID: 0}
-  enemySpeed: 2.5
   damageAmount: 1
+  status: {fileID: 0}
   alertRadius: 3
   findPlayerDedication: -1
   knockbackDistance: 0.5
